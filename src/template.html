@@ -10,11 +10,129 @@
 </head>
 <body>
     <header>
-        <h1>Weather App</h1>
+        <div id="title-banner">
+            <img src="./assets/weather-pouring.svg" alt="weather app icon" id="website-icon">
+            <h1 id="page-name">Weather App</h1>
+        </div>
+        
+        <div id="options-banner">
+            <button type="button" id="settings" class="options-button">Settings</button>
+        </div>
     </header>
 
     <main>
-        <h2>Hello World!</h2>
+        <!-- search bar (start) -->
+        <div id="city-search">
+            <input type="text" id="city-search-field">
+            <button type="button" id="city-search-button" aria-label="search"></button>
+        </div>
+        <!-- search bar (end) -->
+
+        <div id="location-display">
+            <img src="./assets/map-marker.svg" alt="location or map marker" id="location-icon">
+            <p id="city">Tacloban</p>
+            <p id="country">Philippines</p>
+        </div>
+
+        <div id="date-display">
+            <p id="date">Monday, November 13, 2023</p>
+        </div>
+
+        <!-- temperature display (start) -->
+        <div id="main-temp-display">
+            <p id="main-temp">31</p>
+            <p id="main-unit">
+                <span class="degrees">&deg;</span>
+                <span class="units">C</span>
+            </p>
+        </div>
+
+        <div id="high-low-temp">
+            <p id="main-high-temp">
+                <span class="label">HIGH</span>
+                <span class="temp">32</span>
+                <span class="degrees">&deg;</span>
+                <span class="units">C</span>
+            </p>
+            <p>|</p>
+            <p id="main-low-temp">
+                <span class="label">LOW</span>
+                <span class="temp">26</span>
+                <span class="degrees">&deg;</span>
+                <span class="units">C</span>
+            </p>
+        </div>
+
+        <div id="more-stats">
+            <div id="stat-precipitation" class="stat">
+                <img src="./assets/weather-pouring.svg" alt="precipitation-icon" class="stat-icon">
+                <p class="stat-label">Precipitation:</p>
+
+                <div class="stat-value">
+                    <p class="stat-num">0</p>
+                    <p>mm/hr</p>
+                </div>
+                
+            </div>
+
+            <div id="stat-humidity" class="stat">
+                <img src="./assets/water-outline.svg" alt="humidity-icon" class="stat-icon">
+                <p class="stat-label">Humidity:</p>
+
+                <div class="stat-value">
+                    <p class="stat-num">0</p>
+                    <p>%</p>
+                </div>
+                
+            </div>
+
+            <div id="stat-winds" class="stat">
+                <img src="./assets/weather-windy.svg" alt="winds-icon" class="stat-icon">
+                <p class="stat-label">Winds:</p>
+
+                <div class="stat-value">
+                    <p class="stat-num">18</p>
+                    <p>km/hr</p>
+                    <p>E</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- temperature display (end) -->
+
+        <div id="hourly-forecast-cont">
+            <div class="hourly-forecast">
+                <p class="hourly-time">16:00</p>
+                <img class="hourly-weather-icon" src="./assets/weather-pouring.svg" alt="16:00 sunny icon">
+                <p class="hourly-temp">
+                    <span class="hourly-num">30</span>
+                    <span class="hourly-degree">&deg;</span>
+                    <span class="hourly-unit">C</span>
+                </p>
+            </div>
+            
+        </div>
+
+
+        <div id="daily-forecast-cont">
+            <div class="daily-forecast">
+                <p class="daily-date">11/14</p>
+                <p class="daily-day">Tuesday</p>
+                <img class="daily-weather-icon" src="./assets/weather-windy.svg" alt="novermber 14, sunny icon">
+                <p class="daily-high">
+                    <span class="daily-num">30</span>
+                    <span class="daily-degree">&deg;</span>
+                    <span class="daily-unit">C</span>
+                </p>
+
+                <p class="daily-low">
+                    <span class="daily-num">26</span>
+                    <span class="daily-degree">&deg;</span>
+                    <span class="daily-unit">C</span>
+                </p>
+            </div>
+        </div>
+
     </main>
 
     <footer>

@@ -1,0 +1,220 @@
+@import url('https://fonts.googleapis.com/css2?family=Maven+Pro&family=Montserrat&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--common-font-family);
+}
+
+:root {
+    --icon-size: calc(50px + 1vw);
+    --small-icon-size: calc(20px + 1vw);
+
+    --header-font-size: 1.3rem;
+    --common-font-size: 1rem;
+    --title-font-size: 1.5rem;
+
+    --common-font-family: 'Montserrat', sans-serif;
+    --header-font-family: 'Maven Pro', sans-serif;
+}
+
+img#location-icon {
+    height: 50px;
+    width: 50px;
+}
+
+/* Header (start) */
+header {
+    display: grid;
+    grid-template-columns: 1fr max-content;
+}
+
+div#title-banner {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    align-items: center;
+}
+
+h1#page-name {
+    font-size: var(--title-font-size);
+}
+
+img#website-icon {
+    width: var(--icon-size);
+    height: var(--icon-size);
+}
+
+/* Header (end) */
+
+/* Main (start) */
+div#city-search {
+    width: 70%;
+    display: grid;
+    grid-template-columns: 1fr max-content;
+    justify-items: center;
+    margin: auto;
+}
+input#city-search-field {
+    width: 100%;
+    height: 30px;
+    border: 1px solid black;
+}
+
+button#city-search-button {
+    background-image: url(./assets/search.svg);
+    background-position: center;
+    background-size: 70%;
+    background-repeat: no-repeat;
+    width: 30px;
+    height: 30px;
+    border: 1px solid black;
+}
+
+div#location-display {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas: 
+        "pin city"
+        "country country";
+    margin: auto;
+    width: max-content;
+}
+
+img#location-icon {
+    grid-area: pin;
+    width: calc(var(--header-font-size) * 1.1);
+    height: calc(var(--header-font-size) * 1.1);
+    margin: auto;
+}
+
+p#city {
+    grid-area: city;
+    font-size: calc(var(--header-font-size) * 1.3);
+    font-family: var(--header-font-family);
+}
+
+p#country {
+    grid-area: country;
+    font-size: calc(var(--common-font-size) * 1.1);
+    font-family: var(--header-font-family);
+    justify-self: center;
+}
+
+div#date-display {
+    display: flex;   
+    justify-content: center;
+}
+
+div#date-display p {
+    font-size: var(--common-font-size);
+}
+
+div#main-temp-display {
+   display: grid;
+   grid-template-columns: max-content max-content;
+   width: max-content;
+   margin: auto; 
+
+   /* width: 45vw;
+   height: 45vw;
+   border: 1px solid black;
+   border-radius: 50%; */
+
+   align-content: center;
+   justify-content: center;
+}
+
+p#main-temp {
+    font-size: calc(var(--header-font-size) * 4);
+    font-family: var(--header-font-family);
+}
+
+p#main-unit {
+    display: flex;
+    font-size: calc(var(--header-font-size) * 2);
+}
+
+p#main-unit span.units {
+    font-size: calc(var(--header-font-size) * 2.5);
+}
+
+span.units {
+    align-self: center;
+}
+
+div#high-low-temp {
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+}
+
+div#more-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 30%);
+    margin: auto;
+    justify-content: center;
+    column-gap: 15px;
+}
+
+div.stat {
+    display: grid;
+    flex-direction: column;
+    font-size: calc(var(--common-font-size) * 0.8);
+    grid-template-areas:
+        "stat-icon stat-label"
+        "stat-icon stat-value";
+    width: max-content;
+}
+
+img.stat-icon {
+    grid-area: stat-icon;
+    margin-right: 5px;
+    width: var(--small-icon-size);
+    height: var(--small-icon-size);
+}
+
+p.stat-label {
+    grid-area: stat-label;
+}
+
+div.stat div.stat-value {
+    grid-area: stat-value;
+    display: flex;
+    justify-content: center;
+}
+
+p.stat-num {
+    margin-right: 5px;
+}
+
+/* hourly forecast (start) */
+div#hourly-forecast-cont p {
+    font-size: calc(var(--common-font-size) * 0.8);
+}
+
+/* daily-forecast (start) */
+div.daily-forecast {
+    display: grid;
+    grid-template-columns: repeat(5, 18%);
+    column-gap: 2%;
+    margin: auto;
+}
+
+img.hourly-weather-icon, img.daily-weather-icon {
+    width: var(--small-icon-size);
+    height: var(--small-icon-size);
+}
+
+img.daily-weather-icon{
+    justify-self: center;
+}
+
+/* daily-forecast (end) */
+
+/* hourly forecast (end) */
+
+
+
+/* Main (end) */
