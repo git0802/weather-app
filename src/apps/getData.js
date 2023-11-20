@@ -1,17 +1,27 @@
 const baseURL = 'https://api.weatherapi.com/v1';
 const apiKey = `39350a4b141049a684c174535232410`;
+// const location = 'tacloban';
 
-const getDataFromAPI = async function () {
-    const requestURL = `${baseURL}/current.json?key=${apiKey}&q=tacloban`;
+const getDataFromAPI = async function (location) {
+    const forecastRequestURL = `${baseURL}/forecast.json?key=${apiKey}&q=${location}&days=3`;
 
-    const response= await fetch(requestURL, {
-        method: "GET",
-        mode: "cors",
-    });
+    let forecastObj;
+    try {
+        const forecastResponse = await fetch(forecastRequestURL, {
+            method: "GET",
+            mode: "cors",
+        });
 
-    const responseJson = await response.json()
+        const parsedData = await forecastResponse.json();
 
-    console.log(responseJson);
+        forecastObj = parsedData;
+
+    } catch(err) {
+        forecastObj = 'error';
+    }
+    console.log(forecastObj)
+    return forecastObj;
 }
 
-export {getDataFromAPI}
+
+export {getDataFromAPI};
