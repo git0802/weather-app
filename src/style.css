@@ -59,7 +59,7 @@ button#settings {
     background-repeat: no-repeat;
     border: none;
     width: 40px;
-    height: 40px;
+    height: 40px;   
 }
 
 /* Header (end) */
@@ -204,6 +204,10 @@ div.stat div.stat-value {
 
 p.stat-num {
     margin-right: 5px;
+}
+
+p.wind-dir {
+    margin-left: 5px;
 }
 
 /* hourly forecast (start) */

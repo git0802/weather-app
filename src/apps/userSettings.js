@@ -1,11 +1,12 @@
 
 const userDefault = function () {
-    const city = 'Tacloban';
+    const city = 'Manila';
     const country = 'Philippines';
     const tempUnit = 'c';
     const precipUnit = 'mm';
+    const windUnit = 'kph';
 
-    return {city, country, tempUnit, precipUnit};
+    return {city, country, tempUnit, precipUnit, windUnit};
 }
 
 const setInitial = function () {
@@ -15,4 +16,13 @@ const setInitial = function () {
     } 
 }
 
-export {setInitial}
+const getUserSettings = function () {
+    return JSON.parse(localStorage.weatherAppSettings);
+}
+
+const getUserPref = function (property) {
+    const userSettings = JSON.parse(localStorage.weatherAppSettings);
+    return userSettings[property];
+}
+
+export {setInitial, getUserSettings, getUserPref}
