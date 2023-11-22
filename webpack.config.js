@@ -40,7 +40,7 @@ module.exports = merge(common, {
     }),
 
     new CopyWebpackPlugin({
-      patterns: [{ from: "src/public", to: "public" }],
+      patterns: [{ from: "src/assets", to: "assets" }],
     }),
 
     new webpack.DefinePlugin({

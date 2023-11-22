@@ -63,7 +63,7 @@ div#options-banner {
 
 button#settings {
     background-color: transparent;
-    background-image: url("./public/cog.svg");
+    background-image: url("./assets/cog.svg");
     background-size: 70%;
     background-position: center;
     background-repeat: no-repeat;
@@ -89,7 +89,7 @@ input#city-search-field {
 }
 
 button#city-search-button {
-    background-image: url(./public/search.svg);
+    background-image: url(./assets/search.svg);
     background-position: center;
     background-size: 70%;
     background-repeat: no-repeat;
