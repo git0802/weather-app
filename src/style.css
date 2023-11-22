@@ -143,12 +143,6 @@ div#main-temp-display {
    grid-template-columns: max-content max-content;
    width: max-content;
    margin: auto; 
-
-   /* width: 45vw;
-   height: 45vw;
-   border: 1px solid black;
-   border-radius: 50%; */
-
    align-content: center;
    justify-content: center;
 }
@@ -170,6 +164,12 @@ p#main-unit span.units {
 span.units {
     align-self: center;
 }
+
+p#main-condition {
+    text-align: center;
+    font-size: var(--common-font-size);
+}
+
 
 div#high-low-temp {
     display: flex;

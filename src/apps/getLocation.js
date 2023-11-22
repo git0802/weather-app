@@ -1,6 +1,6 @@
 import { getDataFromAPI } from "./getData";
 import { setForecastData, getForecastData } from "./memoryHandler";
-import { displayMainData } from "./displayDataToDom";
+import { displayDataToDOM } from "./displayDataToDom";
 import { getUserPref } from "./userSettings";
 
 const locationBar = document.querySelector('input#city-search-field');
@@ -30,7 +30,7 @@ const getLocationWeather = async function (location) {
         setForecastData(forecastData);
 
         // Displays data to DOM upon clicking search button
-        displayMainData(forecastData);
+        displayDataToDOM(forecastData);
     }
 
 }
