@@ -19,7 +19,7 @@ const getDataFromAPI = async function (location) {
     } catch(err) {
         forecastObj = 'error';
     }
-    console.log(forecastObj)
+    
     return forecastObj;
 }
 
