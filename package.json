@@ -9,17 +9,9 @@
     "build": "webpack --config webpack.prod.js",
     "deploy": "git subtree push --prefix dist origin gh-pages"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/makieldeviso/weather-app.git"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/makieldeviso/weather-app/issues"
-  },
-  "homepage": "https://github.com/makieldeviso/weather-app#readme",
   "devDependencies": {
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.8.1",

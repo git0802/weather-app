@@ -1,9 +1,8 @@
-const baseURL = 'https://api.weatherapi.com/v1';
-const apiKey = `39350a4b141049a684c174535232410`;
+require("dotenv").config();
 // const location = 'tacloban';
 
 const getDataFromAPI = async function (location) {
-    const forecastRequestURL = `${baseURL}/forecast.json?key=${apiKey}&q=${location}&days=3`;
+    const forecastRequestURL = `${process.env.BASE_URL}/forecast.json?key=${process.env.API_KEY}&q=${location}&days=3`;
 
     let forecastObj;
     try {
