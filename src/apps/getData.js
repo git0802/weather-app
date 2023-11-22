@@ -1,26 +1,26 @@
-require("dotenv").config();
+const apiUrl = process.env.REACT_APP_API_URL;
+const apiKey = process.env.REACT_APP_API_KEY;
+
 // const location = 'tacloban';
 
 const getDataFromAPI = async function (location) {
-    const forecastRequestURL = `${process.env.BASE_URL}/forecast.json?key=${process.env.API_KEY}&q=${location}&days=3`;
+  const forecastRequestURL = `${apiUrl}/forecast.json?key=${apiKey}&q=${location}&days=3`;
 
-    let forecastObj;
-    try {
-        const forecastResponse = await fetch(forecastRequestURL, {
-            method: "GET",
-            mode: "cors",
-        });
+  let forecastObj;
+  try {
+    const forecastResponse = await fetch(forecastRequestURL, {
+      method: "GET",
+      mode: "cors",
+    });
 
-        const parsedData = await forecastResponse.json();
+    const parsedData = await forecastResponse.json();
 
-        forecastObj = parsedData;
+    forecastObj = parsedData;
+  } catch (err) {
+    forecastObj = "error";
+  }
 
-    } catch(err) {
-        forecastObj = 'error';
-    }
-    
-    return forecastObj;
-}
+  return forecastObj;
+};
 
-
-export {getDataFromAPI};
+export { getDataFromAPI };
