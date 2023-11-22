@@ -104,6 +104,7 @@ const createHourlyForecast = function (data) {
         const condition = hourlyObj.condition.text; // condition description string
         const cdnIcon = hourlyObj.condition.icon; // src url
         const tempUnit = getUserPref('tempUnit');
+        const tempVal = Math.round(hourlyObj[`temp_${tempUnit}`]);
 
         const hourlyCont = document.createElement('div');
         hourlyCont.setAttribute('class', 'hourly-forecast');
@@ -121,8 +122,8 @@ const createHourlyForecast = function (data) {
         const temp = document.createElement('p');
         temp.setAttribute('class', 'hourly-temp');
 
-        createSpan(temp, 'hourly-num', `${hourlyObj[`temp_${tempUnit}`]}`);
-        createSpan(temp, 'hourly-degree', '%');
+        createSpan(temp, 'hourly-num', `${tempVal}`);
+        createSpan(temp, 'hourly-degree', '\u00B0');
         createSpan(temp, 'hourly-unit', `${tempUnit.toUpperCase()}`);
 
         const components = [time, weatherIcon, temp];

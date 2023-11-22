@@ -17,7 +17,17 @@
 
     --common-font-family: 'Montserrat', sans-serif;
     --header-font-family: 'Maven Pro', sans-serif;
+
+    --common-padding: calc(5px + 1vw);
+    --common-margin: calc(10px + 1vw);
 }
+
+/* main {
+    display: flex;
+    flex-direction: column;
+} */
+
+
 
 img#location-icon {
     height: 50px;
@@ -211,9 +221,35 @@ p.wind-dir {
 }
 
 /* hourly forecast (start) */
+div#hourly-forecast-cont {
+    display: grid;
+    grid-template-columns: repeat(25, max-content);
+    gap: 10px;
+    margin: var(--common-margin) auto;
+    padding: var(--common-padding);
+    width: 90vw;
+    overflow-x: scroll;
+
+}
+
+div.hourly-forecast {
+    display: flex;
+    flex-direction: column;
+    row-gap: 3px;
+    align-items: center;
+    width: 50px;
+    text-align: center;
+    border: 1px solid black;
+    padding: 3px;
+    border-radius: 3px;
+}
+
 div#hourly-forecast-cont p {
     font-size: calc(var(--common-font-size) * 0.8);
+    width: 100%;
 }
+
+/* hourly forecast (end) */
 
 /* daily-forecast (start) */
 div.daily-forecast {
@@ -233,9 +269,5 @@ img.daily-weather-icon{
 }
 
 /* daily-forecast (end) */
-
-/* hourly forecast (end) */
-
-
 
 /* Main (end) */
