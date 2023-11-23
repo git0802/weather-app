@@ -4,11 +4,11 @@ import { WeatherData } from "@/types";
 import React from "react";
 import ForecastDays from "./forecast-day";
 
-interface DayForcastProps {
+interface SummaryProps {
   data: WeatherData | null;
 }
 
-const DayForcast: React.FC<DayForcastProps> = ({ data }) => {
+const Summary: React.FC<SummaryProps> = ({ data }) => {
   const am = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
   const currentStatus = Number(new Date().getHours().toFixed());
 
@@ -36,4 +36,4 @@ const DayForcast: React.FC<DayForcastProps> = ({ data }) => {
   );
 };
 
-export default DayForcast;
+export default Summary;

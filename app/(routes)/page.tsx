@@ -10,6 +10,7 @@ import { WeatherData } from "@/types";
 import DayForecast from "./components/day-forecast";
 import Condition from "./components/condition";
 import LoadingBar from "react-top-loading-bar";
+import { UnderlineTabs } from "@/app/(routes)/components/underlinetabs";
 
 export default function Home() {
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
@@ -96,7 +97,10 @@ export default function Home() {
             <Condition data={weatherData} />
           </div>
           <div className="lg:col-span-4">
-            <DayForecast data={weatherData} />
+            <div className="mt-4 py-5">
+              <UnderlineTabs className tabData={weatherData} />
+            </div>
+            {/* <DayForecast data={weatherData} /> */}
           </div>
         </div>
       </div>

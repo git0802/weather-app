@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@material-tailwind/react": "^2.1.4",
     "axios": "^1.6.0",
     "date-fns": "^2.30.0",
     "lucide-react": "^0.292.0",
