@@ -98,7 +98,7 @@ export default function Home() {
           </div>
           <div className="lg:col-span-4">
             <div className="mt-4 py-5">
-              <UnderlineTabs className tabData={weatherData} />
+              <UnderlineTabs tabData={weatherData} />
             </div>
             {/* <DayForecast data={weatherData} /> */}
           </div>
