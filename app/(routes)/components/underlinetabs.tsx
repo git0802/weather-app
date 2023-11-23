@@ -10,23 +10,23 @@ import DayForcast from "./day-forecast";
 import Summary from "./summary";
 
 export function UnderlineTabs(tabData: any) {
-  const [activeTab, setActiveTab] = React.useState("html");
+  const [activeTab, setActiveTab] = React.useState("dayForcast");
 
   const data = [
     {
       label: "WEEKLY FORECAST",
-      value: "DayForcast",
+      value: "dayForcast",
       desc: <DayForcast data={tabData.tabData} />,
     },
     {
       label: "SUMMARY",
-      value: "Summary",
+      value: "summary",
       desc: <Summary data={tabData.tabData} />,
     },
   ];
 
   return (
-    <Tabs value="html">
+    <Tabs value={activeTab}>
       <TabsHeader
         className="rounded-none text-[#202b3c] font-semibold text-sm bg-transparent p-0"
         indicatorProps={{
