@@ -16,9 +16,6 @@ interface SummaryProps {
 }
 
 const Summary: React.FC<SummaryProps> = ({ data }) => {
-  //   const am = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-  //   const currentStatus = Number(new Date().getHours().toFixed());
-
   const summaryData = `In the hallowed halls of the great winter kingdom, looming clouds gather like conspirators whispering across the sky on Thursday the 23rd, plotting an overcast silence with not a single droplet daring to escape their grasp. Yet, the very next day, the clouds find themselves riddled with indecision, scattering about as if unsure where to cast their fleeting shadows, the air tense with a meager 6% chance of precipitation, an emotionless lottery for even the most hopeful rain dancers. Behold the theatrical pause as Saturday's stage is set with yet another overcast monologue, doubtless rehearsing for the grand deluge to come.
 
   Come Sunday, the sky weeps with the fervor of unrequited love, showering the ground with 100% certainty—a tearful ovation in the midst of a mundane forecast, with winds murmuring secrets from the south-west. The grand finale approaches on Monday with a vengeful 25 mph wind shaking the very foundations of the week, whipping a flurry of light snow like audience applause, only to ease into a week of encores, once again cooling to the soft hisses of light snowfalls and the anticlimactic whispers of an almost indiscernible flurry.`;
