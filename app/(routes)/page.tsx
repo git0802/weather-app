@@ -100,7 +100,6 @@ export default function Home() {
             <div className="mt-4 py-5">
               <UnderlineTabs tabData={weatherData} />
             </div>
-            {/* <DayForecast data={weatherData} /> */}
           </div>
         </div>
       </div>
