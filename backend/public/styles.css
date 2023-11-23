@@ -1,0 +1,272 @@
+/* Base styles */
+body {
+  background: linear-gradient(to right, #f7f7f7, #ffffff);
+  font-family: "Roboto", sans-serif;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.play-button {
+  margin-top: 10px;
+  display: block;
+}
+
+input[type="text"] {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+  width: 100%; /* Change to 100% for full width on mobile */
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s;
+}
+
+button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s, box-shadow 0.3s;
+  width: 100%; /* Full width on mobile */
+}
+
+button:hover {
+  background-color: #45a049;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+  color: #333;
+  text-align: center;
+}
+
+h3 {
+  color: #333;
+  text-align: center;
+  font-size: medium; /* Reduce the font size */
+  font-style: italic; /* Italicize the text */
+}
+
+h2 {
+  color: #45a049;
+  text-align: center;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  font-size: 0.8em;
+}
+
+audio {
+  display: block;
+  max-width: 100%;
+  margin: 20px auto; /* Center the audio player */
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 10px; /* Less padding on smaller screens */
+  }
+
+  input[type="text"],
+  button {
+    width: 100%; /* Full width on mobile */
+  }
+}
+
+/* Style the form elements */
+#locationForm {
+  text-align: center; /* Center the form contents */
+}
+
+/* Style the input field */
+#locationInput {
+  width: 50%; /* Smaller width */
+  max-width: 300px; /* Maximum width it can grow to */
+  margin: 0 auto; /* Center the input field */
+}
+
+/* Style the button */
+.submit-button {
+  width: 50%; /* Smaller width */
+  max-width: 150px; /* Maximum width it can grow to */
+  margin: 10px auto; /* Space above the button and center it */
+  display: block; /* Block level to fill width of container */
+}
+
+/* You might also want to style the container of the form to ensure it's centered */
+.container {
+  width: 100%; /* Use the full width */
+  max-width: 600px; /* Maximum width of the container */
+  margin: 0 auto; /* Center the container */
+  padding: 0 20px; /* Padding on the sides */
+}
+
+/* Center and size the loading GIF */
+#loadingGif {
+  display: block; /* Use block to allow margin auto to work */
+  margin: 10px auto; /* Center the image with auto margin */
+  max-width: 200px; /* Maximum width of the GIF */
+  height: auto; /* Maintain aspect ratio */
+  width: 30%; /* Reduces the width to 50% of its original size */
+}
+/* General styles, apply on all devices */
+#generatedImage {
+  width: 100%; /* Full width on mobile devices */
+  height: auto; /* Maintain aspect ratio */
+  max-width: 1024px; /* Limit the size of the image to not exceed 1024px */
+  display: block; /* To prevent inline behavior */
+  margin: 20px auto; /* Center the image with margin */
+}
+
+/* Desktop specific styles */
+@media (min-width: 768px) {
+  /* Adjust the min-width as needed for desktop breakpoint */
+  #generatedImage {
+    width: 40%; /* Half width on desktop */
+  }
+}
+
+.small-link {
+  font-size: 0.8em;
+  color: #000; /* Or any color you prefer */
+}
+
+/* Apply base styles to all input fields for consistency */
+input[type="text"],
+input[type="email"],
+button {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+  width: 100%; /* Change to 100% for full width on mobile */
+  box-sizing: border-box; /* Include padding and border in the width */
+  margin-bottom: 10px; /* Add some space below each input field */
+}
+
+/* Style the subscribe button similarly to the submit button */
+#subscribeForm button {
+  background-color: #4caf50; /* Same green color */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+/* Ensure the form items are centered and responsive */
+#subscribeForm input,
+#subscribeForm button {
+  max-width: 300px; /* Control max width */
+  margin: 10px auto; /* Centering */
+  display: block; /* Stack elements */
+}
+
+/* Add some spacing and styling to the footer for better appeal */
+footer {
+  text-align: center;
+  padding: 40px 20px; /* More padding */
+  background-color: #f9f9f9; /* Light grey background */
+  border-top: 1px solid #eaeaea; /* Add a border to the top */
+  font-size: 0.9em; /* Slightly larger font size */
+}
+
+.hidden {
+  display: none;
+}
+
+/* Set the progress bar container to use flexbox and center its children */
+#progressBarContainer {
+  width: 35%; /* Set the desired width of the progress bar container */
+  margin: 0 auto; /* Center the container within its parent */
+  background-color: #ddd;
+  display: none; /* Start with the progress bar hidden */
+}
+
+/* The progress bar itself */
+#progressBar {
+  width: 0%; /* Start the progress bar as empty */
+  max-width: 100%; /* Allow the progress bar to fill the container */
+  height: 22px;
+  background-color: #4caf50;
+  transition: width 17s linear;
+}
+
+/* Media query for mobile devices */
+@media (max-width: 768px) {
+  #progressBarContainer {
+    width: calc(100% - 40px); /* Adjusted container width to provide padding */
+    margin: 10px auto; /* Centered the container with automatic margins */
+  }
+}
+
+.centered-link {
+  text-align: center;
+  margin-top: 20px; /* Adjusted margin-top for spacing */
+}
+
+.centered-link a {
+  text-decoration: none;
+  color: #1766b5; /* Custom link color */
+  font-weight: bold; /* Bold text */
+  font-size: 14px; /* Adjusted font size */
+}
+
+.line-space {
+  height: 20px; /* Line spacing */
+}
+
+/* Additional CSS */
+.walk-score-container {
+  text-align: center; /* Center alignment for the text */
+  margin-top: 20px; /* Space above the container */
+}
+
+.walk-score-container img {
+  max-width: 100%; /* Image is responsive within the container */
+  height: auto; /* Maintain aspect ratio */
+}
+
+/* Style improvements for links */
+.walk-score-container a {
+  display: inline-block;
+  margin: 5px;
+  text-decoration: none;
+  color: #007bff; /* Link color */
+}
+
+/* Styles for the header banner */
+.header-banner {
+  width: 100%; /* Full width on smaller screens */
+  max-width: 800px; /* Maximum width set to 1000px */
+  height: auto; /* Maintain aspect ratio */
+  display: block; /* Block display */
+  margin: 0 auto; /* Center the banner */
+}
+
+/* Adjust header image size for smaller screens */
+@media (max-width: 768px) {
+  .header-banner {
+    width: 100%; /* Full width on smaller screens */
+    height: auto; /* Maintain aspect ratio */
+  }
+}
+
+.ad-container {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  min-height: 100px; /* Minimum height to ensure space for the ad */
+  width: 100%; /* Ensure the container spans the width of its parent */
+  display: block; /* This can be adjusted based on your layout needs */
+}
