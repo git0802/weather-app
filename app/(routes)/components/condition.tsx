@@ -42,14 +42,14 @@ const Condition: React.FC<ConditionProps> = ({ data }) => {
       value: temp_f + "°",
     });
     formattedData.push({
-      key: "Pressure",
-      value: Math.floor(pressure_mb * 0.015) + " psi",
-    });
-    formattedData.push({
       key: "Condition",
       value: condition.text,
     });
     formattedData.push({ key: "Cloud", value: cloud + "% ☁︎" });
+    formattedData.push({
+      key: "Pressure",
+      value: Math.floor(pressure_mb * 0.015) + " psi",
+    });
     formattedData.push({ key: "Wind mph", value: wind_mph + " m/h" });
     // formattedData.push({ key: "Wind kph", value: wind_kph + " km/h" });
     formattedData.push({ key: "Wind Degree", value: wind_dir });
@@ -57,7 +57,10 @@ const Condition: React.FC<ConditionProps> = ({ data }) => {
     formattedData.push({ key: "UV", value: uv });
     formattedData.push({ key: "Gust mph", value: gust_mph + " m/h" });
     // formattedData.push({ key: "Gust kph", value: gust_kph + " km/h" });
-    formattedData.push({ key: "Visibility in miles", value: vis_miles + "  miles" });
+    formattedData.push({
+      key: "Visibility in miles",
+      value: vis_miles + "  miles",
+    });
     // formattedData.push({
     //   key: "Visibility in kilometer",
     //   value: vis_km + "  km",
