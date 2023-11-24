@@ -1,7 +1,7 @@
 "use client";
 
 import { WeatherData } from "@/types";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Button,
   Spinner,
@@ -36,6 +36,7 @@ const Summary: React.FC<SummaryProps> = ({ data }) => {
   const generateSummary = (summaryType: any) => {
     navigator.geolocation.getCurrentPosition(
       async function () {
+        
         setSummaryData('');
         setSummaryImage('');
         setSummaryAudio('');
@@ -43,9 +44,9 @@ const Summary: React.FC<SummaryProps> = ({ data }) => {
         
         const interval = setInterval(() => {
           setLoadingProgress((oldProgress) => {
-            if (oldProgress === 100) {
+            if (oldProgress >= 75) {  // Changed to 75 for better progress distribution
               clearInterval(interval);
-              return 100;
+              return oldProgress;
             }
             const newProgress = oldProgress + 1;
             return newProgress;
@@ -65,11 +66,27 @@ const Summary: React.FC<SummaryProps> = ({ data }) => {
               summaryType
             }
           );
-          setLoadingProgress(100);
-          setLoadingStatus(true);
-          setSummaryData(res.data.summary);
-          setSummaryImage(res.data.imageUrl);
-          setSummaryAudio(res.data.audioBase64);          
+          clearInterval(interval);
+          const interval2 = setInterval(() => {
+            setLoadingProgress((oldProgress) => {
+              if (oldProgress >= 100) {
+                clearInterval(interval2);
+                return oldProgress;
+              }
+              const newProgress = oldProgress + 1;
+              return newProgress;
+            });
+          }, 125);
+
+          setTimeout(() => {
+            clearInterval(interval2);
+            setLoadingProgress(100);
+            setLoadingStatus(true);
+            setSummaryData(res.data.summary);
+            setSummaryImage(res.data.imageUrl);
+            setSummaryAudio(res.data.audioBase64);
+          }, 10000);
+          
         } catch (error) {
           console.log("Error Fetching Summary Data: ", error);
         }
@@ -79,6 +96,12 @@ const Summary: React.FC<SummaryProps> = ({ data }) => {
       }
     );
   };  
+
+  useEffect(() => {
+    setSummaryData('');
+    setSummaryImage('');
+    setSummaryAudio('');
+  }, [data]);
 
   return (
     <div className={`mt-4 bg-[#202b3c] rounded-xl max-h-[560px] overflow-auto`}>
