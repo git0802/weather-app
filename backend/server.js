@@ -34,11 +34,11 @@ app.set("view engine", "ejs");
 app.use("/generateSummary", async (req, res, next) => {
   let visitorKey = `Location:${new Date()}`;
   let ip = getRealIP(req);
-  // await db.set(visitorKey, {
-  //   location: req.body.address ?? "",
-  //   ipAddress: ip,
-  //   timestamp: new Date(),
-  // });
+  await db.set(visitorKey, {
+    location: req.body.address ?? "",
+    ipAddress: ip,
+    timestamp: new Date(),
+  });
   next();
 });
 app.get("/", (req, res) => {
