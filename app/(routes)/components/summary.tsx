@@ -45,6 +45,7 @@ const Summary: React.FC<SummaryProps> = ({ data }) => {
         setSummaryImage('');
         setSummaryAudio('');
         setLoadingProgress(0); 
+        setStatusError(false);
         
         const interval = setInterval(() => {
           setLoadingProgress((oldProgress) => {
