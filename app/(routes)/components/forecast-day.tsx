@@ -32,7 +32,7 @@ const ForecastDays: React.FC<ForecastDaysProps> = ({ value }) => {
                 am.includes(currentStatus) ? "text-white" : "text-white"
               } font-bold text-lg`}
             >
-              {value.day.avgtemp_c}°
+              {value.day.avgtemp_f}°
             </h1>
           </div>
           <div className="flex flex-col justify-center mr-2">
@@ -41,14 +41,14 @@ const ForecastDays: React.FC<ForecastDaysProps> = ({ value }) => {
                 am.includes(currentStatus) ? "text-[#c4cad3]" : "text-[#c4cad3]"
               } text-[9px] lg:text-xs`}
             >
-              Max Temp: {value.day.maxtemp_c}
+              Max Temp: {value.day.maxtemp_f}
             </h1>
             <h1
               className={`${
                 am.includes(currentStatus) ? "text-[#c4cad3]" : "text-[#c4cad3]"
               } text-[9px] lg:text-xs`}
             >
-              Min Temp: {value.day.mintemp_c}
+              Min Temp: {value.day.mintemp_f}
             </h1>
             <h1
               className={`${

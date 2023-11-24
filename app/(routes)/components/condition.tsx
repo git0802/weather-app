@@ -12,10 +12,10 @@ const Condition: React.FC<ConditionProps> = ({ data }) => {
   if (data) {
     const {
       last_updated,
-      feelslike_c,
+      feelslike_f,
       wind_mph,
       wind_kph,
-      wind_degree,
+      wind_dir,
       humidity,
       cloud,
       uv,
@@ -31,22 +31,22 @@ const Condition: React.FC<ConditionProps> = ({ data }) => {
       value: format(parseISO(last_updated), "MMMM d, yyyy h:mm a"),
     });
     formattedData.push({
-      key: "Feels like in Celcius",
-      value: feelslike_c + "°",
+      key: "Feels like in Fahrenheit",
+      value: feelslike_f + "°",
     });
     formattedData.push({ key: "Wind mph", value: wind_mph + " m/h" });
-    formattedData.push({ key: "Wind kph", value: wind_kph + " km/h" });
-    formattedData.push({ key: "Wind Degree", value: wind_degree + "°" });
+    // formattedData.push({ key: "Wind kph", value: wind_kph + " km/h" });
+    formattedData.push({ key: "Wind Degree", value: wind_dir });
     formattedData.push({ key: "Humidity", value: humidity + "% 🌢" });
     formattedData.push({ key: "Cloud", value: cloud + "% ☁︎" });
     formattedData.push({ key: "UV", value: uv });
     formattedData.push({ key: "Gust mph", value: gust_mph + " m/h" });
-    formattedData.push({ key: "Gust kph", value: gust_kph + " km/h" });
-    formattedData.push({ key: "Visibility in miles", value: vis_miles + " m" });
-    formattedData.push({
-      key: "Visibility in kilometer",
-      value: vis_km + "  km",
-    });
+    // formattedData.push({ key: "Gust kph", value: gust_kph + " km/h" });
+    formattedData.push({ key: "Visibility in miles", value: vis_miles + "  miles" });
+    // formattedData.push({
+    //   key: "Visibility in kilometer",
+    //   value: vis_km + "  km",
+    // });
   }
 
   return (

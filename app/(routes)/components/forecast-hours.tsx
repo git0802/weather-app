@@ -36,7 +36,7 @@ const ForecastHours: React.FC<ForecastHoursProps> = ({
             am.includes(currentStatus) ? "text-white" : "text-white"
           } font-bold text-lg`}
         >
-          {value.temp_c}°
+          {value.temp_f}°
         </h1>
       </div>
     </div>
