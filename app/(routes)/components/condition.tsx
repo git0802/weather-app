@@ -34,12 +34,12 @@ const Condition: React.FC<ConditionProps> = ({ data }) => {
       value: format(parseISO(last_updated), "MMMM d, yyyy h:mm a"),
     });
     formattedData.push({
-      key: "Feels like in Fahrenheit",
-      value: feelslike_f + "°",
-    });
-    formattedData.push({
       key: "Temperature",
       value: temp_f + "°",
+    });
+    formattedData.push({
+      key: "Feels like in Fahrenheit",
+      value: feelslike_f + "°",
     });
     formattedData.push({
       key: "Condition",
