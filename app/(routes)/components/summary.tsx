@@ -115,7 +115,7 @@ const Summary: React.FC<SummaryProps> = ({ data }) => {
   }, [data]);
 
   return (
-    <div className={`mt-4 bg-[#202b3c] rounded-xl max-h-[560px] overflow-auto`}>
+    <div className={`mt-4 bg-[#202b3c] rounded-xl lg:max-h-[560px] overflow-auto`}>
       <div className="p-5 flex justify-center flex-col gap-3">
         <div className="flex gap-3 justify-center">
           <Button
@@ -167,6 +167,7 @@ const Summary: React.FC<SummaryProps> = ({ data }) => {
                   color="red"
                   checked={picture}
                   onChange={(event) => setPicture(event.target.checked)}
+                  disabled={loadingStatus}
                 />
               </ListItemPrefix>
               <Typography className="text-sm text-white">
@@ -189,6 +190,7 @@ const Summary: React.FC<SummaryProps> = ({ data }) => {
                   color="red"
                   checked={audio}
                   onChange={(event) => setAudio(event.target.checked)}
+                  disabled={loadingStatus}
                 />
               </ListItemPrefix>
               <Typography className="text-sm text-white">
@@ -221,7 +223,7 @@ const Summary: React.FC<SummaryProps> = ({ data }) => {
         </div>
         {
           summaryImage && (
-            <div className="w-full flex justify-center items-center h-[370px]">
+            <div className="w-full flex justify-center items-center">
               <img alt="sun" src={summaryImage} className="w-full rounded-xl" />
             </div>
           )
