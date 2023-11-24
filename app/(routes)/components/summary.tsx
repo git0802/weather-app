@@ -67,6 +67,7 @@ const Summary: React.FC<SummaryProps> = ({ data }) => {
             }
           );
           clearInterval(interval);
+
           const interval2 = setInterval(() => {
             setLoadingProgress((oldProgress) => {
               if (oldProgress >= 100) {
@@ -88,6 +89,8 @@ const Summary: React.FC<SummaryProps> = ({ data }) => {
           }, 10000);
           
         } catch (error) {
+          clearInterval(interval);
+          setLoadingStatus(true);
           console.log("Error Fetching Summary Data: ", error);
         }
       },
