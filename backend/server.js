@@ -6,8 +6,14 @@ const weatherRoutes = require("./routes/weatherRoutes");
 const { getLocationCoordinates } = require("./controllers/locationController");
 const dramaticWeatherRoutes = require("./routes/dramaticWeatherRoutes");
 const path = require("path");
+const cors = require("cors");
+const bodyParser = require('body-parser');
+
 
 const app = express();
+app.use(bodyParser.json({limit: '50mb'})); // Increase JSON limit
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true})); // Increase URL-encoded limit
+
 app.set("trust proxy", true); // This line should be after const app = express();
 
 const fs = require("fs");
@@ -17,6 +23,7 @@ app.get("/ads.txt", (req, res) => {
   res.sendFile(path.join(__dirname, "ads.txt"));
 });
 
+app.use(cors("*"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
@@ -27,11 +34,11 @@ app.set("view engine", "ejs");
 app.use("/generateSummary", async (req, res, next) => {
   let visitorKey = `Location:${new Date()}`;
   let ip = getRealIP(req);
-  await db.set(visitorKey, {
-    location: req.body.address ?? "",
-    ipAddress: ip,
-    timestamp: new Date(),
-  });
+  // await db.set(visitorKey, {
+  //   location: req.body.address ?? "",
+  //   ipAddress: ip,
+  //   timestamp: new Date(),
+  // });
   next();
 });
 app.get("/", (req, res) => {

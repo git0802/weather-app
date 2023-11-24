@@ -1,7 +1,7 @@
 "use client";
 
 import { WeatherData } from "@/types";
-import React from "react";
+import React, { useState } from "react";
 import {
   Button,
   Spinner,
@@ -10,17 +10,75 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import Image from "next/image";
+import axios from "axios";
+import { Progress } from "@material-tailwind/react";
 
 interface SummaryProps {
   data: WeatherData | null;
 }
 
 const Summary: React.FC<SummaryProps> = ({ data }) => {
-  const summaryData = `In the hallowed halls of the great winter kingdom, looming clouds gather like conspirators whispering across the sky on Thursday the 23rd, plotting an overcast silence with not a single droplet daring to escape their grasp. Yet, the very next day, the clouds find themselves riddled with indecision, scattering about as if unsure where to cast their fleeting shadows, the air tense with a meager 6% chance of precipitation, an emotionless lottery for even the most hopeful rain dancers. Behold the theatrical pause as Saturday's stage is set with yet another overcast monologue, doubtless rehearsing for the grand deluge to come.
+  const [picture, setPicture] = useState(false);
+  const [audio, setAudio] = useState(false);
 
-  Come Sunday, the sky weeps with the fervor of unrequited love, showering the ground with 100% certainty—a tearful ovation in the midst of a mundane forecast, with winds murmuring secrets from the south-west. The grand finale approaches on Monday with a vengeful 25 mph wind shaking the very foundations of the week, whipping a flurry of light snow like audience applause, only to ease into a week of encores, once again cooling to the soft hisses of light snowfalls and the anticlimactic whispers of an almost indiscernible flurry.`;
+  const [summaryData, setSummaryData] = useState('');
+  const [summaryImage, setSummaryImage] = useState('');
+  const [summaryAudio, setSummaryAudio] = useState('');
 
-  const loadingStatus = true;
+  const address = data?.location.name;
+  const dailyForecasts = data?.forecast.forecastday;
+  const lat = data?.location.lat;
+  const lon = data?.location.lon;
+
+  const [loadingStatus, setLoadingStatus] = useState(true);  
+  const [loadingProgress, setLoadingProgress]=  useState(0);
+
+  const generateSummary = (summaryType: any) => {
+    navigator.geolocation.getCurrentPosition(
+      async function () {
+        setSummaryData('');
+        setSummaryImage('');
+        setSummaryAudio('');
+        setLoadingProgress(0); 
+        
+        const interval = setInterval(() => {
+          setLoadingProgress((oldProgress) => {
+            if (oldProgress === 100) {
+              clearInterval(interval);
+              return 100;
+            }
+            const newProgress = oldProgress + 1;
+            return newProgress;
+          });
+        }, 500);
+
+        try {
+          setLoadingStatus(false);
+          const res = await axios.post(
+            `${process.env.NEXT_PUBLIC_BASE_URL}/generateSummary`, {
+              dailyForecasts,
+              lat,
+              lon,
+              address,
+              picture,
+              audio,
+              summaryType
+            }
+          );
+          setLoadingProgress(100);
+          setLoadingStatus(true);
+          setSummaryData(res.data.summary);
+          setSummaryImage(res.data.imageUrl);
+          setSummaryAudio(res.data.audioBase64);          
+        } catch (error) {
+          console.log("Error Fetching Summary Data: ", error);
+        }
+      },
+      function (error) {
+        console.error("Error getting Summary Data: ", error.message);        
+      }
+    );
+  };  
 
   return (
     <div className={`mt-4 bg-[#202b3c] rounded-xl max-h-[560px] overflow-auto`}>
@@ -30,6 +88,8 @@ const Summary: React.FC<SummaryProps> = ({ data }) => {
             className="rounded-full w-5/12 flex items-center justify-center"
             size="md"
             color="blue"
+            onClick={() => generateSummary("creative")}
+            disabled={!loadingStatus}
           >
             {loadingStatus ? (
               <Typography className="font-semibold text-xs">
@@ -43,6 +103,8 @@ const Summary: React.FC<SummaryProps> = ({ data }) => {
             className="rounded-full w-5/12 flex items-center justify-center"
             size="md"
             color="amber"
+            onClick={() => generateSummary("pro")}
+            disabled={!loadingStatus}
           >
             {loadingStatus ? (
               <Typography className="font-semibold text-xs">
@@ -69,6 +131,8 @@ const Summary: React.FC<SummaryProps> = ({ data }) => {
                   }}
                   crossOrigin={undefined}
                   color="red"
+                  checked={picture}
+                  onChange={(event) => setPicture(event.target.checked)}
                 />
               </ListItemPrefix>
               <Typography className="text-sm text-white">
@@ -89,6 +153,8 @@ const Summary: React.FC<SummaryProps> = ({ data }) => {
                   }}
                   crossOrigin={undefined}
                   color="red"
+                  checked={audio}
+                  onChange={(event) => setAudio(event.target.checked)}
                 />
               </ListItemPrefix>
               <Typography className="text-sm text-white">
@@ -103,22 +169,33 @@ const Summary: React.FC<SummaryProps> = ({ data }) => {
               <Typography color="white">{summaryData}</Typography>
             </div>
           ) : (
-            <div className="w-full flex justify-center items-center bg-[#E7F9ED] rounded-xl h-[370px]">
+            <div className="border w-full flex flex-col space-x-3 justify-center items-center rounded-xl h-[370px]">              
               <Image alt="sun" src="/images/sun.svg" width={100} height={100} />
+              <div className={loadingStatus ? 'invisible' : 'w-1/2'}>
+                <Progress value={loadingProgress} color="amber" />
+              </div>
             </div>
           )}
         </div>
-        <div className="w-full flex justify-center items-center bg-[#E7F9ED] rounded-xl h-[370px]">
-          <Image alt="sun" src="/images/sun.svg" width={100} height={100} />
-        </div>
-        <div className="w-full">
-          <audio id="song" className="block w-full max-w-md mx-auto" controls>
-            <source
-              src="https://open.spotify.com/track/7DE0I3buHcns00C0YEsYsY?si=5e0442c12f514f04"
-              type="audio/mpeg"
-            />
-          </audio>
-        </div>
+        {
+          summaryImage && (
+            <div className="w-full flex justify-center items-center h-[370px]">
+              <img alt="sun" src={summaryImage} className="w-full rounded-xl" />
+            </div>
+          )
+        }
+        {
+          summaryAudio && (
+            <div className="w-full">
+              <audio id="song" className="block w-full max-w-md mx-auto" controls>
+                <source
+                  src={`data:audio/mpeg;base64,${summaryAudio}`}
+                  type="audio/mpeg"
+                />
+              </audio>
+            </div>
+          )
+        }
       </div>
     </div>
   );

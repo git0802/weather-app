@@ -12,6 +12,9 @@ import Summary from "./summary";
 export function UnderlineTabs(tabData: any) {
   const [activeTab, setActiveTab] = React.useState("dayForcast");
 
+  console.log("weather data: ", tabData.tabData);
+  
+
   const data = [
     {
       label: "WEEKLY FORECAST",
