@@ -8,7 +8,9 @@ import {
   Checkbox,
   ListItemPrefix,
   Typography,
+  Alert,
 } from "@material-tailwind/react";
+import { Exclamation, XCircleOutline } from "heroicons-react";
 import Image from "next/image";
 import axios from "axios";
 import { Progress } from "@material-tailwind/react";
@@ -30,8 +32,10 @@ const Summary: React.FC<SummaryProps> = ({ data }) => {
   const lat = data?.location.lat;
   const lon = data?.location.lon;
 
-  const [loadingStatus, setLoadingStatus] = useState(true);  
+  const [loadingStatus, setLoadingStatus] = useState(false);  
   const [loadingProgress, setLoadingProgress]=  useState(0);
+
+  const [statusError, setStatusError] = useState(false)
 
   const generateSummary = (summaryType: any) => {
     navigator.geolocation.getCurrentPosition(
@@ -54,7 +58,7 @@ const Summary: React.FC<SummaryProps> = ({ data }) => {
         }, 500);
 
         try {
-          setLoadingStatus(false);
+          setLoadingStatus(true);
           const res = await axios.post(
             `${process.env.NEXT_PUBLIC_BASE_URL}/generateSummary`, {
               dailyForecasts,
@@ -82,7 +86,7 @@ const Summary: React.FC<SummaryProps> = ({ data }) => {
           setTimeout(() => {
             clearInterval(interval2);
             setLoadingProgress(100);
-            setLoadingStatus(true);
+            setLoadingStatus(false);
             setSummaryData(res.data.summary);
             setSummaryImage(res.data.imageUrl);
             setSummaryAudio(res.data.audioBase64);
@@ -90,11 +94,14 @@ const Summary: React.FC<SummaryProps> = ({ data }) => {
           
         } catch (error) {
           clearInterval(interval);
-          setLoadingStatus(true);
+          setLoadingStatus(false);
+          setStatusError(true);
           console.log("Error Fetching Summary Data: ", error);
         }
       },
       function (error) {
+        setLoadingStatus(false);
+        setStatusError(true);
         console.error("Error getting Summary Data: ", error.message);        
       }
     );
@@ -115,9 +122,9 @@ const Summary: React.FC<SummaryProps> = ({ data }) => {
             size="md"
             color="blue"
             onClick={() => generateSummary("creative")}
-            disabled={!loadingStatus}
+            disabled={loadingStatus}
           >
-            {loadingStatus ? (
+            {!loadingStatus ? (
               <Typography className="font-semibold text-xs">
                 Creative
               </Typography>
@@ -130,9 +137,9 @@ const Summary: React.FC<SummaryProps> = ({ data }) => {
             size="md"
             color="amber"
             onClick={() => generateSummary("pro")}
-            disabled={!loadingStatus}
+            disabled={loadingStatus}
           >
-            {loadingStatus ? (
+            {!loadingStatus ? (
               <Typography className="font-semibold text-xs">
                 Professional
               </Typography>
@@ -197,9 +204,17 @@ const Summary: React.FC<SummaryProps> = ({ data }) => {
           ) : (
             <div className="border w-full flex flex-col space-x-3 justify-center items-center rounded-xl h-[370px]">              
               <Image alt="sun" src="/images/sun.svg" width={100} height={100} />
-              <div className={loadingStatus ? 'invisible' : 'w-1/2'}>
-                <Progress value={loadingProgress} color="amber" />
-              </div>
+              {
+                statusError ? (
+                  <div className={statusError ? 'w-2/3' : 'invisible'}>
+                    <Alert icon={<Exclamation />} color="red"  onClose={() => setStatusError(false)}>Server Errors</Alert>
+                  </div>
+                ) : (
+                  <div className={loadingStatus ? 'w-1/2' : 'invisible'}>
+                    <Progress value={loadingProgress} color="amber" />
+                  </div>
+                )
+              }
             </div>
           )}
         </div>
