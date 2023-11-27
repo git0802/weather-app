@@ -13,7 +13,7 @@ export function UnderlineTabs(tabData: any) {
   const [activeTab, setActiveTab] = React.useState("dayForcast");
 
   console.log("weather data: ", tabData.tabData);
-  
+
 
   const data = [
     {
@@ -22,7 +22,7 @@ export function UnderlineTabs(tabData: any) {
       desc: <DayForcast data={tabData.tabData} />,
     },
     {
-      label: "SUMMARY",
+      label: "WEATHER SUMMARY",
       value: "summary",
       desc: <Summary data={tabData.tabData} />,
     },
