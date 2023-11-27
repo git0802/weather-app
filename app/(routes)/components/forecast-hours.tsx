@@ -33,7 +33,7 @@ const ForecastHours: React.FC<ForecastHoursProps> = ({
           className={`${am.includes(currentStatus) ? "text-white" : "text-white"
             } font-bold text-lg`}
         >
-          {value.temp_f}°F
+          {Math.floor(value.temp_f)}°F
         </h1>
       </div>
     </div>

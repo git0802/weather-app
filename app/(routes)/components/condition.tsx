@@ -39,27 +39,27 @@ const Condition: React.FC<ConditionProps> = ({ data }) => {
     // });
     formattedData.push({
       key: "Feels like in Fahrenheit",
-      value: feelslike_f + "°F",
+      value: Math.floor(feelslike_f) + "°F",
     });
     // formattedData.push({
     //   key: "Condition",
     //   value: condition.text,
     // });
-    formattedData.push({ key: "Cloud", value: cloud + "% ☁︎" });
+    formattedData.push({ key: "Cloud", value: Math.floor(cloud) + "% ☁︎" });
     // formattedData.push({
     //   key: "Pressure",
     //   value: Math.floor(pressure_mb * 0.015) + " psi",
     // });
-    formattedData.push({ key: "Wind mph", value: wind_mph + " m/h" });
+    formattedData.push({ key: "Wind mph", value: Math.floor(wind_mph) + " m/h" });
     // formattedData.push({ key: "Wind kph", value: wind_kph + " km/h" });
     formattedData.push({ key: "Wind Degree", value: wind_dir });
-    formattedData.push({ key: "Humidity", value: humidity + "% 🌢" });
+    formattedData.push({ key: "Humidity", value: Math.floor(humidity) + "% 🌢" });
     formattedData.push({ key: "UV", value: uv });
-    formattedData.push({ key: "Gust mph", value: gust_mph + " m/h" });
+    formattedData.push({ key: "Gust mph", value: Math.floor(gust_mph) + " m/h" });
     // formattedData.push({ key: "Gust kph", value: gust_kph + " km/h" });
     formattedData.push({
       key: "Visibility in miles",
-      value: vis_miles + "  miles",
+      value: Math.floor(vis_miles) + "  miles",
     });
     // formattedData.push({
     //   key: "Visibility in kilometer",

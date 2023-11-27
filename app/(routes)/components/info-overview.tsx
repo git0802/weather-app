@@ -140,7 +140,7 @@ const InfoOverview: React.FC<InfoOverviewProps> = ({
               className={`${am.includes(currentStatus) ? "text-white" : "text-white"
                 } text-4xl font-bold`}
             >
-              {data?.current.temp_f}°F
+              {Math.floor(data?.current.temp_f ?? 0)}°F
             </h1>
           </div>
         </div>
