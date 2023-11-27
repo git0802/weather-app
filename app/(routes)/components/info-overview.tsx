@@ -46,50 +46,45 @@ const InfoOverview: React.FC<InfoOverviewProps> = ({
   return (
     <div>
       <input
-        className={`w-1/2 lg:hidden px-6 py-3 ${
-          am.includes(currentStatus)
-            ? "bg-[#202b3c] text-white"
-            : "bg-[#202b3c] text-white"
-        } text-xs rounded-xl outline-none`}
+        className={`w-1/2 lg:hidden px-6 py-3 ${am.includes(currentStatus)
+          ? "bg-[#202b3c] text-white"
+          : "bg-[#202b3c] text-white"
+          } text-xs rounded-xl outline-none`}
         placeholder="🔍 Search for cities..."
         value={searchText}
         onChange={(event) => setSearchText(event.target.value)}
         onFocus={() => setisClicked(false)}
       />
       <div
-        className={`absolute ${
-          am.includes(currentStatus)
-            ? "bg-[#202b3c] border-white"
-            : "bg-[#202b3c] border-white"
-        } lg:hidden lg:w-2/5 rounded-xl mt-4 border z-10 overflow-hidden ${
-          searchResults.length === 0 ? "lg:hidden hidden" : "flex"
-        } ${isClicked === true ? `lg:hidden hidden` : ""}`}
+        className={`absolute ${am.includes(currentStatus)
+          ? "bg-[#202b3c] border-white"
+          : "bg-[#202b3c] border-white"
+          } lg:hidden lg:w-2/5 rounded-xl mt-4 border z-10 overflow-hidden ${searchResults.length === 0 ? "lg:hidden hidden" : "flex"
+          } ${isClicked === true ? `lg:hidden hidden` : ""}`}
       >
         <div className="my-4 w-full">
           {searchResults.map((res) => (
             <div
               key={res.id}
               onClick={() => onClick(res.lat, res.lon)}
-              className={`p-1 ${
-                am.includes(currentStatus)
-                  ? "text-white hover:bg-[#0B131E]"
-                  : "text-white hover:bg-[#0B131E]"
-              } px-4`}
+              className={`p-1 ${am.includes(currentStatus)
+                ? "text-white hover:bg-[#0B131E]"
+                : "text-white hover:bg-[#0B131E]"
+                } px-4`}
             >
               {res.name + ", " + res.country}
               <span
-                className={`${
-                  am.includes(currentStatus)
-                    ? "text-[#c4cad3]"
-                    : "text-[#c4cad3]"
-                } text-xs italic`}
+                className={`${am.includes(currentStatus)
+                  ? "text-[#c4cad3]"
+                  : "text-[#c4cad3]"
+                  } text-xs italic`}
               >{` Region: ${res.region}`}</span>
             </div>
           ))}
         </div>
       </div>
       <div className="flex lg:justify-start w-full lg:mt-20">
-        <div className="relative flex items-center justify-center h-36 w-36">
+        <div className="relative flex items-start justify-center h-36 w-36">
           <img
             className="h-24 w-24 object-cover object-center"
             src={iconUrl}
@@ -98,66 +93,52 @@ const InfoOverview: React.FC<InfoOverviewProps> = ({
         </div>
         <div className="relative flex flex-col justify-center">
           <h1
-            className={`${
-              am.includes(currentStatus) ? "text-white" : "text-white"
-            } tracking-wider text-1xl lg:text-4xl font-bold uppercase`}
+            className={`${am.includes(currentStatus) ? "text-white" : "text-white"
+              } tracking-wider text-xl lg:text-4xl font-bold uppercase`}
           >
             {data?.location.name}
-            <span
-              className={`${
-                am.includes(currentStatus) ? "text-white" : "text-white"
-              } lg:hidden lg:tracking-wider text-1xl lg:text-6xl font-bold uppercase`}
-            >{`, ${data?.location.country}`}</span>
           </h1>
-          <div className="mt-2 flex items-center justify-start lg:justify-end">
-            <div className="flex flex-col gap-1">
-              <h6
-                className={`${
-                  am.includes(currentStatus)
-                    ? "text-[#c4cad3]"
-                    : "text-[#c4cad3]"
-                } text-[8px] lg:hidden lg:text-xs`}
-              >
-                Chances of daily rain:{" "}
-                {data?.forecast.forecastday[0].day.daily_will_it_rain}%
+          <div className="flex flex-col text-[#c4cad3] font-bold">
+            <h5>
+              {data?.location.region && data?.location.region}
+              {data?.location.region && ", "}
+              {data?.location.country}
+            </h5>
+            <div className="flex flex-row gap-1 justify-start lg:justify-between">
+              <h6 className="text-[10px] lg:text-sm">
+                {"Latitude: "}
+                {data?.location.lat}
               </h6>
-              <h6
-                className={`${
-                  am.includes(currentStatus)
-                    ? "text-[#c4cad3]"
-                    : "text-[#c4cad3]"
-                } text-[8px] lg:hidden lg:text-xs`}
-              >
-                Chances of daily snow:{" "}
-                {data?.forecast.forecastday[0].day.daily_will_it_snow}%
+              <h6 className="text-[10px] lg:text-sm">
+                {"Longitude: "}
+                {data?.location.lon}
               </h6>
             </div>
-            <div className="flex flex-col gap-1 ml-2">
+          </div>
+          <div className="mt-2 flex gap-1 items-center justify-start lg:justify-between">
+            <div className="flex flex-col gap-1">
               <h6
-                className={`${
-                  am.includes(currentStatus)
-                    ? "text-[#c4cad3]"
-                    : "text-[#c4cad3]"
-                } text-[8px] lg:text-xs`}
+                className={`${am.includes(currentStatus)
+                  ? "text-[#c4cad3]"
+                  : "text-[#c4cad3]"
+                  } text-[8px] lg:text-xs`}
               >
                 Chances of rain:{" "}
                 {data?.forecast.forecastday[0].day.daily_chance_of_rain}%
               </h6>
               <h6
-                className={`${
-                  am.includes(currentStatus)
-                    ? "text-[#c4cad3]"
-                    : "text-[#c4cad3]"
-                } text-[8px] lg:text-xs`}
+                className={`${am.includes(currentStatus)
+                  ? "text-[#c4cad3]"
+                  : "text-[#c4cad3]"
+                  } text-[8px] lg:text-xs`}
               >
                 Chances of snow:{" "}
                 {data?.forecast.forecastday[0].day.daily_chance_of_snow}%
               </h6>
             </div>
             <h1
-              className={`${
-                am.includes(currentStatus) ? "text-white" : "text-white"
-              } text-4xl font-bold ml-4`}
+              className={`${am.includes(currentStatus) ? "text-white" : "text-white"
+                } text-4xl font-bold`}
             >
               {data?.current.temp_f}°
             </h1>
