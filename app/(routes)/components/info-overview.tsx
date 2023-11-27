@@ -83,7 +83,7 @@ const InfoOverview: React.FC<InfoOverviewProps> = ({
           ))}
         </div>
       </div>
-      <div className="flex lg:justify-start w-full lg:mt-20">
+      <div className="flex lg:justify-start w-full">
         <div className="relative flex items-start justify-center h-36 w-36">
           <img
             className="h-24 w-24 object-cover object-center"

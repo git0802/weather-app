@@ -117,7 +117,7 @@ const Summary: React.FC<SummaryProps> = ({ data }) => {
   }, [data]);
 
   return (
-    <div className={`mt-4 bg-[#202b3c] rounded-xl lg:max-h-[560px] overflow-auto`}>
+    <div className={`mt-4 bg-[#202b3c] rounded-xl overflow-auto`}>
       <div className="p-5 flex justify-center flex-col gap-3">
         <div className="flex gap-3 justify-center">
           <Button

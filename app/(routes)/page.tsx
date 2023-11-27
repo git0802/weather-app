@@ -71,33 +71,41 @@ export default function Home() {
         onLoaderFinished={() => setProgress(0)}
       />
       <div className="flex flex-col py-4 sm:py-6 lg:py-8">
-        <div className="flex flex-col-reverse lg:grid lg:grid-cols-12 lg:items-start lg:gap-x-4 w-full">
-          <div className="lg:col-span-8">
+        <div className="flex flex-col justify-center lg:flex-row gap-8 w-full lg:grid lg:grid-cols-12">
+          <div className="flex flex-col gap-8 lg:col-span-5">
             <SearchPanel
               onClick={onClickCity}
               isClicked={isCityClicked}
               setisClicked={setIsCityClicked}
             />
-            <HourlyForecast data={weatherData} />
-          </div>
-          <div className="lg:col-span-4">
             <InfoOverview
               data={weatherData}
               onClick={onClickCity}
               isClicked={isCityClicked}
               setisClicked={setIsCityClicked}
             />
+            <HourlyForecast data={weatherData} />
+          </div>
+          <div className="w-full lg:col-span-7 lg:mt-20">
+            {/* <InfoOverview
+              data={weatherData}
+              onClick={onClickCity}
+              isClicked={isCityClicked}
+              setisClicked={setIsCityClicked}
+            /> */}
+            <UnderlineTabs tabData={weatherData} />
           </div>
         </div>
-        <div className="flex flex-col lg:grid lg:grid-cols-12 lg:items-start lg:gap-x-4 w-full">
-          <div className="lg:col-span-6">
+        <div className="flex flex-col w-full">
+          {/* <div className="lg:col-span-6">
             <Condition data={weatherData} />
           </div>
           <div className="lg:col-span-6">
             <div className="mt-4 py-5">
               <UnderlineTabs tabData={weatherData} />
             </div>
-          </div>
+          </div> */}
+          <Condition data={weatherData} />
         </div>
       </div>
     </Container>
