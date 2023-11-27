@@ -117,7 +117,7 @@ const Summary: React.FC<SummaryProps> = ({ data }) => {
   }, [data]);
 
   return (
-    <div className={`mt-4 bg-[#202b3c] rounded-xl overflow-auto`}>
+    <div className={`mt-4 bg-[#202b3c] rounded-xl h-[635px] xl:h-[500px] overflow-auto`}>
       <div className="p-5 flex justify-center flex-col gap-3">
         <div className="flex gap-3 justify-center">
           <Button
@@ -207,7 +207,7 @@ const Summary: React.FC<SummaryProps> = ({ data }) => {
               <Typography color="white">{summaryData}</Typography>
             </div>
           ) : (
-            <div className="border w-full flex flex-col space-x-3 justify-center items-center rounded-xl h-[370px]">
+            <div className="border w-full flex flex-col space-x-3 justify-center items-center rounded-xl h-[435px] xl:h-[310px]">
               <Image alt="sun" src="/images/sun.svg" width={100} height={100} />
               {
                 statusError ? (

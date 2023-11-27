@@ -15,7 +15,7 @@ const DayForcast: React.FC<DayForcastProps> = ({ data }) => {
   return (
     <div
       className={`mt-4 ${am.includes(currentStatus) ? "bg-[#202b3c]" : "bg-[#202b3c]"
-        } rounded-xl`}
+        } rounded-xl flex justify-center items-center lg:h-[500px]`}
     >
       <div className="px-5 py-1">
         {/* <h1
