@@ -146,17 +146,14 @@ const createPrompt = (
     "Here's the weather data for the upcoming week, you will tell me a dramatic narative about it:";
 
   weatherData.forEach((day, index) => {
-    prompt += `On ${new Date(day.date).toDateString()}, a high of ${
-      day.highTemp
-    }° and a low of ${day.lowTemp}°. `;
-    prompt += `The day will be marked by ${
-      day.weatherDescription
-    }, with a ${Math.round(
-      day.precipitationProbability * 100
-    )}% chance of precipitation. `;
-    prompt += `Winds will travel at ${
-      day.windSpeed
-    } mph, coming from the ${degreesToCardinal(day.windDirection)}. `;
+    prompt += `On ${new Date(day.date).toDateString()}, a high of ${day.highTemp
+      }°F and a low of ${day.lowTemp}°F. `;
+    prompt += `The day will be marked by ${day.weatherDescription
+      }, with a ${Math.round(
+        day.precipitationProbability * 100
+      )}% chance of precipitation. `;
+    prompt += `Winds will travel at ${day.windSpeed
+      } mph, coming from the ${degreesToCardinal(day.windDirection)}. `;
     if (index !== weatherData.length - 1) prompt += "And then, ";
   });
 

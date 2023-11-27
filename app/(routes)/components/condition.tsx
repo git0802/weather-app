@@ -35,11 +35,11 @@ const Condition: React.FC<ConditionProps> = ({ data }) => {
     });
     formattedData.push({
       key: "Temperature",
-      value: temp_f + "°",
+      value: temp_f + "°F",
     });
     formattedData.push({
       key: "Feels like in Fahrenheit",
-      value: feelslike_f + "°",
+      value: feelslike_f + "°F",
     });
     formattedData.push({
       key: "Condition",
