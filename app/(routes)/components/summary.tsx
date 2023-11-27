@@ -32,21 +32,23 @@ const Summary: React.FC<SummaryProps> = ({ data }) => {
   const lat = data?.location.lat;
   const lon = data?.location.lon;
 
-  const [loadingStatus, setLoadingStatus] = useState(false);  
-  const [loadingProgress, setLoadingProgress]=  useState(0);
+  const [loadingStatus, setLoadingStatus] = useState(false);
+  const [loadingProgress, setLoadingProgress] = useState(0);
 
   const [statusError, setStatusError] = useState(false)
+  const [buttonType, setButtonType] = useState("");
 
   const generateSummary = (summaryType: any) => {
+    setButtonType(summaryType);
     navigator.geolocation.getCurrentPosition(
       async function () {
-        
+
         setSummaryData('');
         setSummaryImage('');
         setSummaryAudio('');
-        setLoadingProgress(0); 
+        setLoadingProgress(0);
         setStatusError(false);
-        
+
         const interval = setInterval(() => {
           setLoadingProgress((oldProgress) => {
             if (oldProgress >= 75) {  // Changed to 75 for better progress distribution
@@ -62,14 +64,14 @@ const Summary: React.FC<SummaryProps> = ({ data }) => {
           setLoadingStatus(true);
           const res = await axios.post(
             `${process.env.NEXT_PUBLIC_BASE_URL}/generateSummary`, {
-              dailyForecasts,
-              lat,
-              lon,
-              address,
-              picture,
-              audio,
-              summaryType
-            }
+            dailyForecasts,
+            lat,
+            lon,
+            address,
+            picture,
+            audio,
+            summaryType
+          }
           );
           clearInterval(interval);
 
@@ -92,7 +94,7 @@ const Summary: React.FC<SummaryProps> = ({ data }) => {
             setSummaryImage(res.data.imageUrl);
             setSummaryAudio(res.data.audioBase64);
           }, 10000);
-          
+
         } catch (error) {
           clearInterval(interval);
           setLoadingStatus(false);
@@ -103,10 +105,10 @@ const Summary: React.FC<SummaryProps> = ({ data }) => {
       function (error) {
         setLoadingStatus(false);
         setStatusError(true);
-        console.error("Error getting Summary Data: ", error.message);        
+        console.error("Error getting Summary Data: ", error.message);
       }
     );
-  };  
+  };
 
   useEffect(() => {
     setSummaryData('');
@@ -125,7 +127,7 @@ const Summary: React.FC<SummaryProps> = ({ data }) => {
             onClick={() => generateSummary("creative")}
             disabled={loadingStatus}
           >
-            {!loadingStatus ? (
+            {(!loadingStatus || buttonType !== "creative") ? (
               <Typography className="font-semibold text-xs">
                 Creative
               </Typography>
@@ -140,7 +142,7 @@ const Summary: React.FC<SummaryProps> = ({ data }) => {
             onClick={() => generateSummary("pro")}
             disabled={loadingStatus}
           >
-            {!loadingStatus ? (
+            {(!loadingStatus || buttonType !== "pro") ? (
               <Typography className="font-semibold text-xs">
                 Professional
               </Typography>
@@ -205,12 +207,12 @@ const Summary: React.FC<SummaryProps> = ({ data }) => {
               <Typography color="white">{summaryData}</Typography>
             </div>
           ) : (
-            <div className="border w-full flex flex-col space-x-3 justify-center items-center rounded-xl h-[370px]">              
+            <div className="border w-full flex flex-col space-x-3 justify-center items-center rounded-xl h-[370px]">
               <Image alt="sun" src="/images/sun.svg" width={100} height={100} />
               {
                 statusError ? (
                   <div className={statusError ? 'w-2/3' : 'invisible'}>
-                    <Alert icon={<Exclamation />} color="red"  onClose={() => setStatusError(false)}>Server Errors</Alert>
+                    <Alert icon={<Exclamation />} color="red" onClose={() => setStatusError(false)}>Server Errors</Alert>
                   </div>
                 ) : (
                   <div className={loadingStatus ? 'w-1/2' : 'invisible'}>
