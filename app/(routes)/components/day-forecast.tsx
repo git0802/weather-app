@@ -14,9 +14,8 @@ const DayForcast: React.FC<DayForcastProps> = ({ data }) => {
 
   return (
     <div
-      className={`mt-4 ${
-        am.includes(currentStatus) ? "bg-[#202b3c]" : "bg-[#202b3c]"
-      } rounded-xl`}
+      className={`mt-4 ${am.includes(currentStatus) ? "bg-[#202b3c]" : "bg-[#202b3c]"
+        } rounded-xl`}
     >
       <div className="px-5 py-1">
         {/* <h1
@@ -26,7 +25,7 @@ const DayForcast: React.FC<DayForcastProps> = ({ data }) => {
         >
           WEEKLY FORECAST
         </h1> */}
-        <div className="grid grid-cols-2">
+        <div className="grid grid-cols-3">
           {data?.forecast.forecastday.map((day, index) => (
             <ForecastDays key={index} value={day} />
           ))}

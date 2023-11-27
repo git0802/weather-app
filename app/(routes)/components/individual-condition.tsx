@@ -12,9 +12,8 @@ const IndividualCondition: React.FC<IndividualConditionProps> = ({ value }) => {
   return (
     <div className="flex flex-col">
       <h1
-        className={`${
-          am.includes(currentStatus) ? "text-[#c4cad3]" : "text-[#c4cad3]"
-        } font-semibold text-sm`}
+        className={`${am.includes(currentStatus) ? "text-[#c4cad3]" : "text-[#c4cad3]"
+          } font-semibold text-sm`}
       >
         CONDITION
       </h1>

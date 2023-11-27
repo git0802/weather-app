@@ -25,8 +25,7 @@ export default function Home() {
         const forecastUrl = "forecast.json";
         try {
           const res = await axios.get(
-            `//api.weatherapi.com/v1/${forecastUrl}?key=${
-              process.env.NEXT_PUBLIC_API_KEY
+            `//api.weatherapi.com/v1/${forecastUrl}?key=${process.env.NEXT_PUBLIC_API_KEY
             }&q=${lat + "," + lon}&days=7`
           );
           setWeatherData(res.data);
@@ -48,10 +47,8 @@ export default function Home() {
           const forecastUrl = "forecast.json";
           try {
             const res = await axios.get(
-              `//api.weatherapi.com/v1/${forecastUrl}?key=${
-                process.env.NEXT_PUBLIC_API_KEY
-              }&q=${
-                position.coords.latitude + "," + position.coords.longitude
+              `//api.weatherapi.com/v1/${forecastUrl}?key=${process.env.NEXT_PUBLIC_API_KEY
+              }&q=${position.coords.latitude + "," + position.coords.longitude
               }&days=7`
             );
             setWeatherData(res.data);
@@ -93,10 +90,10 @@ export default function Home() {
           </div>
         </div>
         <div className="flex flex-col lg:grid lg:grid-cols-12 lg:items-start lg:gap-x-4 w-full">
-          <div className="lg:col-span-8">
+          <div className="lg:col-span-6">
             <Condition data={weatherData} />
           </div>
-          <div className="lg:col-span-4">
+          <div className="lg:col-span-6">
             <div className="mt-4 py-5">
               <UnderlineTabs tabData={weatherData} />
             </div>

@@ -33,23 +33,23 @@ const Condition: React.FC<ConditionProps> = ({ data }) => {
       key: "Last Updated",
       value: format(parseISO(last_updated), "MMMM d, yyyy h:mm a"),
     });
-    formattedData.push({
-      key: "Temperature",
-      value: temp_f + "°F",
-    });
+    // formattedData.push({
+    //   key: "Temperature",
+    //   value: temp_f + "°F",
+    // });
     formattedData.push({
       key: "Feels like in Fahrenheit",
       value: feelslike_f + "°F",
     });
-    formattedData.push({
-      key: "Condition",
-      value: condition.text,
-    });
+    // formattedData.push({
+    //   key: "Condition",
+    //   value: condition.text,
+    // });
     formattedData.push({ key: "Cloud", value: cloud + "% ☁︎" });
-    formattedData.push({
-      key: "Pressure",
-      value: Math.floor(pressure_mb * 0.015) + " psi",
-    });
+    // formattedData.push({
+    //   key: "Pressure",
+    //   value: Math.floor(pressure_mb * 0.015) + " psi",
+    // });
     formattedData.push({ key: "Wind mph", value: wind_mph + " m/h" });
     // formattedData.push({ key: "Wind kph", value: wind_kph + " km/h" });
     formattedData.push({ key: "Wind Degree", value: wind_dir });
