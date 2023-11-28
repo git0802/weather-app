@@ -44,7 +44,7 @@ const InfoOverview: React.FC<InfoOverviewProps> = ({
   }, [searchText]);
 
   return (
-    <div>
+    <div className="flex flex-col gap-8 justify-center">
       <input
         className={`w-1/2 lg:hidden px-6 py-3 ${am.includes(currentStatus)
           ? "bg-[#202b3c] text-white"

@@ -17,7 +17,7 @@ const IndividualCondition: React.FC<IndividualConditionProps> = ({ value }) => {
       >
         Current Conditions
       </h1>
-      <div className="grid grid-cols-2 lg:grid-cols-3 w-ful gap-4 mt-6">
+      <div className="grid grid-cols-3 lg:grid-cols-3 w-full gap-4 mt-6">
         {value?.map((item, index) => (
           <ValueCondition key={index} value={item} />
         ))}

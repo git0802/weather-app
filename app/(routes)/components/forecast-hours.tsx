@@ -18,10 +18,9 @@ const ForecastHours: React.FC<ForecastHoursProps> = ({
 
   return (
     <div
-      className={`flex flex-col m-4 justify-center items-center gap-1 ${addRightBorder ? "lg:border-r" : ""
-        } border-[#314159]`}
+      className={`flex flex-col p-4 justify-center items-center gap-1`}
     >
-      <div className="mr-8 flex flex-col justify-center items-center">
+      <div className="mx-3 lg:mx-5 flex flex-col justify-center items-center">
         <h1
           className={`${am.includes(currentStatus) ? "text-[#c4cad3]" : "text-[#c4cad3]"
             } text-1xl lg:text-xs font-semibold`}

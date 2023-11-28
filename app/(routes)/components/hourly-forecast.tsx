@@ -9,7 +9,7 @@ interface InfoOverviewProps {
 
 const HourlyForecast: React.FC<InfoOverviewProps> = ({ data }) => {
   const hour = data?.forecast.forecastday[0].hour || [];
-  const indexToFind = [4, 8, 12, 16, 20, 24];
+  const indexToFind = [6, 12, 18, 24];
   const hourArray = [];
   const am = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
   const currentStatus = Number(new Date().getHours().toFixed());
@@ -25,25 +25,32 @@ const HourlyForecast: React.FC<InfoOverviewProps> = ({ data }) => {
   }
 
   return (
-    <div
-      className={`lg:mt-4 w-full ${am.includes(currentStatus) ? "bg-[#202b3c]" : "bg-[#202b3c]"
-        } rounded-xl`}
-    >
-      <div className="p-5">
-        <h1
+    <div>
+      <h1
+        className={`text-[#c4cad3] font-semibold text-sm`}
+      >
+        Today&apos;s Weather
+      </h1>
+      <div
+        className={`lg:mt-4 w-full ${am.includes(currentStatus) ? "bg-[#202b3c]" : "bg-[#202b3c]"
+          } rounded-xl mt-4`}
+      >
+        <div className="p-5">
+          {/* <h1
           className={`${am.includes(currentStatus) ? "text-[#c4cad3]" : "text-[#c4cad3]"
             } font-semibold text-sm`}
         >
           TODAY&apos;S WEATHER
-        </h1>
-        <div className="flex flex-wrap items-center justify-center mt-4">
-          {hourArray.map((value, index) => (
-            <ForecastHours
-              key={index}
-              value={value}
-              addRightBorder={index < 5}
-            />
-          ))}
+        </h1> */}
+          <div className="flex flex-wrap items-center justify-center divide-x-2 divide-[#c4cad3]">
+            {hourArray.map((value, index) => (
+              <ForecastHours
+                key={index}
+                value={value}
+                addRightBorder={index < 5}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </div>

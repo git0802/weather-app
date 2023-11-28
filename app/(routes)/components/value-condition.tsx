@@ -10,21 +10,18 @@ const ValueCondition: React.FC<ValueConditionProps> = ({ value }) => {
 
   return (
     <div
-      className={`${
-        am.includes(currentStatus) ? "bg-[#202b3c]" : "bg-[#202b3c]"
-      } rounded-xl p-5 space-y-6`}
+      className={`${am.includes(currentStatus) ? "bg-[#202b3c]" : "bg-[#202b3c]"
+        } rounded-xl p-5 space-y-3`}
     >
       <h1
-        className={`${
-          am.includes(currentStatus) ? "text-[#c4cad3]" : "text-[#c4cad3]"
-        } text-1xl lg:text-md font-semibold`}
+        className={`${am.includes(currentStatus) ? "text-[#c4cad3]" : "text-[#c4cad3]"
+          } text-1xl lg:text-md font-semibold`}
       >
         {value.key}
       </h1>
       <h1
-        className={`${
-          am.includes(currentStatus) ? "text-white" : "text-white"
-        } font-bold lg:text-2xl`}
+        className={`${am.includes(currentStatus) ? "text-white" : "text-white"
+          } font-bold lg:text-2xl`}
       >
         {value.value}
       </h1>

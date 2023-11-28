@@ -11,6 +11,7 @@ import DayForecast from "./components/day-forecast";
 import Condition from "./components/condition";
 import LoadingBar from "react-top-loading-bar";
 import { UnderlineTabs } from "@/app/(routes)/components/underlinetabs";
+import Summary from "./components/summary";
 
 export default function Home() {
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
@@ -70,9 +71,9 @@ export default function Home() {
         progress={progress}
         onLoaderFinished={() => setProgress(0)}
       />
-      <div className="flex flex-col py-4 sm:py-6 lg:py-8">
+      <div className="flex flex-col gap-8 py-4 sm:py-6 lg:py-8">
         <div className="flex flex-col justify-center lg:flex-row gap-8 w-full lg:grid lg:grid-cols-12">
-          <div className="flex flex-col gap-8 lg:col-span-5">
+          <div className="flex flex-col gap-8 lg:col-span-6">
             <SearchPanel
               onClick={onClickCity}
               isClicked={isCityClicked}
@@ -84,19 +85,20 @@ export default function Home() {
               isClicked={isCityClicked}
               setisClicked={setIsCityClicked}
             />
-            <HourlyForecast data={weatherData} />
+            {/* <HourlyForecast data={weatherData} /> */}
           </div>
-          <div className="w-full lg:col-span-7 lg:mt-20">
+          <div className="w-full lg:col-span-6 lg:mt-10">
             {/* <InfoOverview
               data={weatherData}
               onClick={onClickCity}
               isClicked={isCityClicked}
               setisClicked={setIsCityClicked}
             /> */}
-            <UnderlineTabs tabData={weatherData} />
+            {/* <UnderlineTabs tabData={weatherData} /> */}
+            <HourlyForecast data={weatherData} />
           </div>
         </div>
-        <div className="flex flex-col w-full">
+        <div className="flex flex-col-reverse lg:flex-row w-full gap-8">
           {/* <div className="lg:col-span-6">
             <Condition data={weatherData} />
           </div>
@@ -105,7 +107,15 @@ export default function Home() {
               <UnderlineTabs tabData={weatherData} />
             </div>
           </div> */}
-          <Condition data={weatherData} />
+          {/* <Condition data={weatherData} /> */}
+          <div className="lg:w-1/2 flex flex-col gap-8 justify-start">
+            <DayForecast data={weatherData} />
+            <Condition data={weatherData} />
+          </div>
+          <div className="lg:w-1/2">
+            <Summary data={weatherData} />
+          </div>
+          {/* <UnderlineTabs tabData={weatherData} /> */}
         </div>
       </div>
     </Container>

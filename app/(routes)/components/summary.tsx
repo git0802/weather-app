@@ -117,131 +117,142 @@ const Summary: React.FC<SummaryProps> = ({ data }) => {
   }, [data]);
 
   return (
-    <div className={`mt-4 bg-[#202b3c] rounded-xl h-[635px] xl:h-[500px] overflow-auto`}>
-      <div className="p-5 flex justify-center flex-col gap-3">
-        <div className="flex gap-3 justify-center">
-          <Button
-            className="rounded-full w-5/12 flex items-center justify-center"
-            size="md"
-            color="blue"
-            onClick={() => generateSummary("creative")}
-            disabled={loadingStatus}
-          >
-            {(!loadingStatus || buttonType !== "creative") ? (
-              <Typography className="font-semibold text-xs">
-                Creative
-              </Typography>
-            ) : (
-              <Spinner color="red" />
-            )}
-          </Button>
-          <Button
-            className="rounded-full w-5/12 flex items-center justify-center"
-            size="md"
-            color="amber"
-            onClick={() => generateSummary("pro")}
-            disabled={loadingStatus}
-          >
-            {(!loadingStatus || buttonType !== "pro") ? (
-              <Typography className="font-semibold text-xs">
-                Professional
-              </Typography>
-            ) : (
-              <Spinner color="red" />
-            )}
-          </Button>
-        </div>
-        <div className="flex justify-center">
-          <div className="flex flex-col justify-center gap-3">
-            <label
-              htmlFor="picture"
-              className="flex w-full cursor-pointer items-center px-3 py-2"
+    <div>
+      <h1
+        className={`text-[#c4cad3] font-semibold text-sm`}
+      >
+        Weather Summary
+      </h1>
+      <div className={`mt-4 bg-[#202b3c] rounded-xl overflow-auto`}>
+        <div className="p-5 flex justify-center flex-col gap-3">
+          <div className="flex gap-3 justify-center">
+            <Button
+              className="rounded-full w-5/12 flex items-center justify-center"
+              size="md"
+              color="blue"
+              onClick={() => generateSummary("creative")}
+              disabled={loadingStatus}
             >
-              <ListItemPrefix className="mr-3">
-                <Checkbox
-                  id="picture"
-                  ripple={false}
-                  className="hover:before:opacity-0"
-                  containerProps={{
-                    className: "p-0",
-                  }}
-                  crossOrigin={undefined}
-                  color="red"
-                  checked={picture}
-                  onChange={(event) => setPicture(event.target.checked)}
-                  disabled={loadingStatus}
-                />
-              </ListItemPrefix>
-              <Typography className="text-sm text-white">
-                Generate Picture
-              </Typography>
-            </label>
-            <label
-              htmlFor="audio"
-              className="flex w-full cursor-pointer items-center px-3 py-2"
+              {(!loadingStatus || buttonType !== "creative") ? (
+                <Typography className="font-semibold text-xs">
+                  Creative
+                </Typography>
+              ) : (
+                <Spinner color="red" />
+              )}
+            </Button>
+            <Button
+              className="rounded-full w-5/12 flex items-center justify-center"
+              size="md"
+              color="amber"
+              onClick={() => generateSummary("pro")}
+              disabled={loadingStatus}
             >
-              <ListItemPrefix className="mr-3">
-                <Checkbox
-                  id="audio"
-                  ripple={false}
-                  className="hover:before:opacity-0"
-                  containerProps={{
-                    className: "p-0",
-                  }}
-                  crossOrigin={undefined}
-                  color="red"
-                  checked={audio}
-                  onChange={(event) => setAudio(event.target.checked)}
-                  disabled={loadingStatus}
-                />
-              </ListItemPrefix>
-              <Typography className="text-sm text-white">
-                Generate Audio
-              </Typography>
-            </label>
+              {(!loadingStatus || buttonType !== "pro") ? (
+                <Typography className="font-semibold text-xs">
+                  Professional
+                </Typography>
+              ) : (
+                <Spinner color="red" />
+              )}
+            </Button>
           </div>
+          <div className="flex flex-col gap-3 justify-center items-center">
+            <div className="flex flex-row justify-between w-2/3 gap-3">
+              <label
+                htmlFor="picture"
+                className="flex w-full cursor-pointer items-center px-3 py-2"
+              >
+                <ListItemPrefix className="mr-3">
+                  <Checkbox
+                    id="picture"
+                    ripple={false}
+                    className="hover:before:opacity-0"
+                    containerProps={{
+                      className: "p-0",
+                    }}
+                    crossOrigin={undefined}
+                    color="red"
+                    checked={picture}
+                    onChange={(event) => setPicture(event.target.checked)}
+                    disabled={loadingStatus}
+                  />
+                </ListItemPrefix>
+                <Typography className="text-sm text-white">
+                  Generate Picture
+                </Typography>
+              </label>
+              <label
+                htmlFor="audio"
+                className="flex w-full cursor-pointer items-center px-3 py-2"
+              >
+                <ListItemPrefix className="mr-3">
+                  <Checkbox
+                    id="audio"
+                    ripple={false}
+                    className="hover:before:opacity-0"
+                    containerProps={{
+                      className: "p-0",
+                    }}
+                    crossOrigin={undefined}
+                    color="red"
+                    checked={audio}
+                    onChange={(event) => setAudio(event.target.checked)}
+                    disabled={loadingStatus}
+                  />
+                </ListItemPrefix>
+                <Typography className="text-sm text-white">
+                  Generate Audio
+                </Typography>
+              </label>
+            </div>
+            <div className="w-full flex justify-center">
+              <h6 className="text-white">Click either <span className="font-bold">Creative</span> or <span className="font-bold">Professional</span> to generate a weather summary</h6>
+            </div>
+          </div>
+          <div>
+            {summaryData ? (
+              <div className="border p-3 rounded-xl">
+                <Typography color="white">{summaryData}</Typography>
+              </div>
+            ) : (
+              <div className="border w-full flex flex-col space-x-3 justify-center items-center rounded-xl h-[545px]">
+
+                <Image alt="sun" src="/images/sun.svg" width={200} height={200} />
+                {
+                  statusError ? (
+                    <div className={statusError ? 'w-2/3' : 'invisible'}>
+                      <Alert icon={<Exclamation />} color="red" onClose={() => setStatusError(false)}>Server Errors</Alert>
+                    </div>
+                  ) : (
+                    <div className={loadingStatus ? 'w-1/2' : 'invisible'}>
+                      <Progress value={loadingProgress} color="amber" />
+                    </div>
+                  )
+                }
+              </div>
+            )}
+          </div>
+          {
+            summaryImage && (
+              <div className="w-full flex justify-center items-center">
+                <img alt="sun" src={summaryImage} className="w-full rounded-xl" />
+              </div>
+            )
+          }
+          {
+            summaryAudio && (
+              <div className="w-full">
+                <audio id="song" className="block w-full max-w-md mx-auto" controls>
+                  <source
+                    src={`data:audio/mpeg;base64,${summaryAudio}`}
+                    type="audio/mpeg"
+                  />
+                </audio>
+              </div>
+            )
+          }
         </div>
-        <div>
-          {summaryData ? (
-            <div className="border p-3 rounded-xl">
-              <Typography color="white">{summaryData}</Typography>
-            </div>
-          ) : (
-            <div className="border w-full flex flex-col space-x-3 justify-center items-center rounded-xl h-[435px] xl:h-[310px]">
-              <Image alt="sun" src="/images/sun.svg" width={100} height={100} />
-              {
-                statusError ? (
-                  <div className={statusError ? 'w-2/3' : 'invisible'}>
-                    <Alert icon={<Exclamation />} color="red" onClose={() => setStatusError(false)}>Server Errors</Alert>
-                  </div>
-                ) : (
-                  <div className={loadingStatus ? 'w-1/2' : 'invisible'}>
-                    <Progress value={loadingProgress} color="amber" />
-                  </div>
-                )
-              }
-            </div>
-          )}
-        </div>
-        {
-          summaryImage && (
-            <div className="w-full flex justify-center items-center">
-              <img alt="sun" src={summaryImage} className="w-full rounded-xl" />
-            </div>
-          )
-        }
-        {
-          summaryAudio && (
-            <div className="w-full">
-              <audio id="song" className="block w-full max-w-md mx-auto" controls>
-                <source
-                  src={`data:audio/mpeg;base64,${summaryAudio}`}
-                  type="audio/mpeg"
-                />
-              </audio>
-            </div>
-          )
-        }
       </div>
     </div>
   );

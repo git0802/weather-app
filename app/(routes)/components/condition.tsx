@@ -31,14 +31,14 @@ const Condition: React.FC<ConditionProps> = ({ data }) => {
     // Push the desired values as strings into the array
     formattedData.push({
       key: "Last Updated",
-      value: format(parseISO(last_updated), "MMMM d, yyyy h:mm a"),
+      value: format(parseISO(last_updated), "h:mm a"),
     });
     // formattedData.push({
     //   key: "Temperature",
     //   value: temp_f + "°F",
     // });
     formattedData.push({
-      key: "Feels like in Fahrenheit",
+      key: "Feels like",
       value: Math.floor(feelslike_f) + "°F",
     });
     // formattedData.push({
@@ -68,8 +68,8 @@ const Condition: React.FC<ConditionProps> = ({ data }) => {
   }
 
   return (
-    <div className="mt-4">
-      <div className="py-5">
+    <div>
+      <div>
         <IndividualCondition value={formattedData} />
       </div>
     </div>
