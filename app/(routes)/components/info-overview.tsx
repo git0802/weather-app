@@ -59,7 +59,7 @@ const InfoOverview: React.FC<InfoOverviewProps> = ({
         className={`absolute ${am.includes(currentStatus)
           ? "bg-[#202b3c] border-white"
           : "bg-[#202b3c] border-white"
-          } lg:hidden lg:w-2/5 rounded-xl mt-4 border z-10 overflow-hidden ${searchResults.length === 0 ? "lg:hidden hidden" : "flex"
+          } lg:hidden lg:w-2/5 rounded-xl mt-20 border z-10 overflow-hidden ${searchResults.length === 0 ? "lg:hidden hidden" : "flex"
           } ${isClicked === true ? `lg:hidden hidden` : ""}`}
       >
         <div className="my-4 w-full">
