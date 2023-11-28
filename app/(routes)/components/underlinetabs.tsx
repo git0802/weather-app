@@ -17,7 +17,7 @@ export function UnderlineTabs(tabData: any) {
 
   const data = [
     {
-      label: "WEEKLY FORECAST",
+      label: "FORECAST",
       value: "dayForcast",
       desc: <DayForcast data={tabData.tabData} />,
     },

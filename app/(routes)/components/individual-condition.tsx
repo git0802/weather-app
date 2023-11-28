@@ -15,7 +15,7 @@ const IndividualCondition: React.FC<IndividualConditionProps> = ({ value }) => {
         className={`${am.includes(currentStatus) ? "text-[#c4cad3]" : "text-[#c4cad3]"
           } font-semibold text-sm`}
       >
-        CONDITION
+        Current Conditions
       </h1>
       <div className="grid grid-cols-2 lg:grid-cols-3 w-ful gap-4 mt-6">
         {value?.map((item, index) => (
