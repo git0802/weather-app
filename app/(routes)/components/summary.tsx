@@ -27,8 +27,10 @@ const Summary: React.FC<SummaryProps> = ({ data }) => {
   const [summaryImage, setSummaryImage] = useState('');
   const [summaryAudio, setSummaryAudio] = useState('');
 
+  const [dailyForecasts, setDailyForecasts] = useState({});
+
   const address = data?.location.name;
-  const dailyForecasts = data?.forecast.forecastday;
+  // const dailyForecasts = data?.forecast.forecastday;
   const lat = data?.location.lat;
   const lon = data?.location.lon;
 
@@ -37,6 +39,28 @@ const Summary: React.FC<SummaryProps> = ({ data }) => {
 
   const [statusError, setStatusError] = useState(false)
   const [buttonType, setButtonType] = useState("");
+
+  async function fetchData() {
+    try {
+      if (lat && lon) {
+        const weatherResponse = await axios.post(
+          `${process.env.NEXT_PUBLIC_BASE_URL}/getWeatherData`, {
+          latitude: lat,
+          longitude: lon
+        }
+        );
+        setDailyForecasts(weatherResponse.data.dailyForecasts);
+        console.log(weatherResponse.data.dailyForecasts);
+
+      }
+    } catch (error) {
+      console.log("Error Fetching Summary Data: ", error);
+    }
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, [data]);
 
   const generateSummary = (summaryType: any) => {
     setButtonType(summaryType);
@@ -61,40 +85,41 @@ const Summary: React.FC<SummaryProps> = ({ data }) => {
         }, 500);
 
         try {
-          setLoadingStatus(true);
-          const res = await axios.post(
-            `${process.env.NEXT_PUBLIC_BASE_URL}/generateSummary`, {
-            dailyForecasts,
-            lat,
-            lon,
-            address,
-            picture,
-            audio,
-            summaryType
+          if (dailyForecasts) {
+            setLoadingStatus(true);
+            const res = await axios.post(
+              `${process.env.NEXT_PUBLIC_BASE_URL}/generateSummary`, {
+              dailyForecasts,
+              lat,
+              lon,
+              address,
+              picture,
+              audio,
+              summaryType
+            }
+            );
+            clearInterval(interval);
+
+            const interval2 = setInterval(() => {
+              setLoadingProgress((oldProgress) => {
+                if (oldProgress >= 100) {
+                  clearInterval(interval2);
+                  return oldProgress;
+                }
+                const newProgress = oldProgress + 1;
+                return newProgress;
+              });
+            }, 125);
+
+            setTimeout(() => {
+              clearInterval(interval2);
+              setLoadingProgress(100);
+              setLoadingStatus(false);
+              setSummaryData(res.data.summary);
+              setSummaryImage(res.data.imageUrl);
+              setSummaryAudio(res.data.audioBase64);
+            }, 10000);
           }
-          );
-          clearInterval(interval);
-
-          const interval2 = setInterval(() => {
-            setLoadingProgress((oldProgress) => {
-              if (oldProgress >= 100) {
-                clearInterval(interval2);
-                return oldProgress;
-              }
-              const newProgress = oldProgress + 1;
-              return newProgress;
-            });
-          }, 125);
-
-          setTimeout(() => {
-            clearInterval(interval2);
-            setLoadingProgress(100);
-            setLoadingStatus(false);
-            setSummaryData(res.data.summary);
-            setSummaryImage(res.data.imageUrl);
-            setSummaryAudio(res.data.audioBase64);
-          }, 10000);
-
         } catch (error) {
           clearInterval(interval);
           setLoadingStatus(false);
@@ -114,7 +139,7 @@ const Summary: React.FC<SummaryProps> = ({ data }) => {
     setSummaryData('');
     setSummaryImage('');
     setSummaryAudio('');
-  }, [data]);
+  }, [dailyForecasts]);
 
   return (
     <div>
