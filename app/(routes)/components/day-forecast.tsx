@@ -37,7 +37,7 @@ const DayForcast: React.FC<DayForcastProps> = ({ data }) => {
         >
           WEEKLY FORECAST
         </h1> */}
-          <div className="grid grid-cols-3">
+          <div className="grid grid-cols-2 xl:grid-cols-3">
             {data?.forecast.forecastday.map((day, index) => (
               day.date === formattedDate ? "" :
                 (<ForecastDays key={index} value={day} />)

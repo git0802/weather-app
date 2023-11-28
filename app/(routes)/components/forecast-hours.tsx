@@ -20,7 +20,7 @@ const ForecastHours: React.FC<ForecastHoursProps> = ({
     <div
       className={`flex flex-col p-4 justify-center items-center gap-1`}
     >
-      <div className="mx-3 lg:mx-5 flex flex-col justify-center items-center">
+      <div className="xl:mx-3 flex flex-col justify-center items-center">
         <h1
           className={`${am.includes(currentStatus) ? "text-[#c4cad3]" : "text-[#c4cad3]"
             } text-1xl lg:text-xs font-semibold`}
