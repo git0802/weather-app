@@ -38,13 +38,12 @@ export default function RootLayout({
           gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}');
         `}
       </Script>
-      <Script
-        id="google-adsense-account"
-        data-ad-client="ca-pub-7051464837195925"
+
+      <script
         async
-        strategy="afterInteractive"
-        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-      />
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7051464837195925"
+        crossorigin="anonymous"
+      ></script>
       <Script src="../components/twitter-pixel.js" strategy="lazyOnload" />
 
       <body className={`${inter.className}`}>{children}</body>
