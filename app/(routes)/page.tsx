@@ -12,6 +12,7 @@ import Condition from "./components/condition";
 import LoadingBar from "react-top-loading-bar";
 import { UnderlineTabs } from "@/app/(routes)/components/underlinetabs";
 import Summary from "./components/summary";
+import { initializeGoogleTagManager } from "../../components/googleTagManager";
 
 export default function Home() {
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
@@ -26,7 +27,8 @@ export default function Home() {
         const forecastUrl = "forecast.json";
         try {
           const res = await axios.get(
-            `//api.weatherapi.com/v1/${forecastUrl}?key=${process.env.NEXT_PUBLIC_API_KEY
+            `//api.weatherapi.com/v1/${forecastUrl}?key=${
+              process.env.NEXT_PUBLIC_API_KEY
             }&q=${lat + "," + lon}&days=7`
           );
           setWeatherData(res.data);
@@ -48,8 +50,10 @@ export default function Home() {
           const forecastUrl = "forecast.json";
           try {
             const res = await axios.get(
-              `//api.weatherapi.com/v1/${forecastUrl}?key=${process.env.NEXT_PUBLIC_API_KEY
-              }&q=${position.coords.latitude + "," + position.coords.longitude
+              `//api.weatherapi.com/v1/${forecastUrl}?key=${
+                process.env.NEXT_PUBLIC_API_KEY
+              }&q=${
+                position.coords.latitude + "," + position.coords.longitude
               }&days=7`
             );
             setWeatherData(res.data);
@@ -62,6 +66,7 @@ export default function Home() {
         }
       );
     }
+    initializeGoogleTagManager("GTM-T8QXCC9J");
   }, []);
 
   return (
