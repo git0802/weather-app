@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ctrl/react-adsense": "^1.7.0",
     "@heroicons/react": "^2.0.18",
     "@material-tailwind/react": "^2.1.4",
     "axios": "^1.6.0",

@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import Script from "next/script";
+import Head from "next/head";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,60 +26,27 @@ export default function RootLayout({
         currentStatus >= 0 && currentStatus <= 12 ? "black" : "black"
       }`}
     >
-<head>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7051464837195925"
-     crossorigin="anonymous"></script>
-		 <!-- Google tag (gtag.js) -->
-		 <script async src="https://www.googletagmanager.com/gtag/js?id=G-G6SC9GX5RB"></script>
-		 <script>
-			  window.dataLayer = window.dataLayer || [];
-			  function gtag(){dataLayer.push(arguments);}
-			  gtag('js', new Date());
-			  gtag('config', 'G-G6SC9GX5RB');
+      <Script
+        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
+      />
+      <Script id="google-analytics">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+ 
+          gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}');
+        `}
+      </Script>
+      <Script
+        id="google-adsense-account"
+        data-ad-client="ca-pub-7051464837195925"
+        async
+        strategy="afterInteractive"
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+      />
+      <Script src="../components/twitter-pixel.js" strategy="lazyOnload" />
 
-			  // Uncomment and use this line if you need to configure Google Ads
-			  gtag('config', 'AW-11415100394');
-		 </script>
-
-	<!-- Google tag (gtag.js) -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=G-3LTJ6P6R4Q"></script>
-	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
-	  gtag('config', 'G-3LTJ6P6R4Q');
-	</script>
-
-
-	<!-- Event snippet for Page view conversion page -->
-	<script>
-		 gtag('event', 'conversion', {'send_to': 'AW-11415100394/EjTECMSQzfcYEOq3ksMq'});
-	</script>
-
-
-	<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7051464837195925"
-		  crossorigin="anonymous"></script>
-
-	<!-- Twitter conversion tracking base code -->
-	<script>
-	!function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);
-	},s.version='1.1',s.queue=[],u=t.createElement(n),u.async=!0,u.src='https://static.ads-twitter.com/uwt.js',
-	a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');
-	twq('config','ohg64');
-	</script>
-	<!-- End Twitter conversion tracking base code -->
-
-	<!-- Google Tag Manager -->
-	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-	})(window,document,'script','dataLayer','GTM-T8QXCC9J');</script>
-	<!-- End Google Tag Manager -->
-
-
-</head>
-      
       <body className={`${inter.className}`}>{children}</body>
     </html>
   );
