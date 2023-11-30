@@ -14,6 +14,7 @@ import { Exclamation, XCircleOutline } from "heroicons-react";
 import Image from "next/image";
 import axios from "axios";
 import { Progress } from "@material-tailwind/react";
+import ReactGA from 'react-ga';
 
 interface SummaryProps {
   data: WeatherData | null;
@@ -63,6 +64,13 @@ const Summary: React.FC<SummaryProps> = ({ data }) => {
 
   const generateSummary = (summaryType: any) => {
     setButtonType(summaryType);
+
+    ReactGA.event({
+      category: 'User Interaction',
+      action: 'Clicked Button',
+      label: `${summaryType}`,
+    });
+
     async function getSummaryData() {
       setSummaryData("");
       setSummaryImage("");

@@ -25,19 +25,6 @@ export default function RootLayout({
       className={`bg-${currentStatus >= 0 && currentStatus <= 12 ? "black" : "black"
         }`}
     >
-      <Script
-        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
-      />
-      <Script id="google-analytics">
-        {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
- 
-          gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}');
-        `}
-      </Script>
-
       <script
         async
         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7051464837195925"

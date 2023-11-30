@@ -13,6 +13,7 @@ import LoadingBar from "react-top-loading-bar";
 import { UnderlineTabs } from "@/app/(routes)/components/underlinetabs";
 import Summary from "./components/summary";
 import { initializeGoogleTagManager } from "../../components/googleTagManager";
+import { initGA, logPageView } from "../../components/analytics";
 
 export default function Home() {
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
@@ -58,6 +59,8 @@ export default function Home() {
       });
     }
     initializeGoogleTagManager("GTM-T8QXCC9J");
+    initGA();
+    logPageView();
   }, []);
 
   return (
