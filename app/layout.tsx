@@ -22,9 +22,8 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`bg-${
-        currentStatus >= 0 && currentStatus <= 12 ? "black" : "black"
-      }`}
+      className={`bg-${currentStatus >= 0 && currentStatus <= 12 ? "black" : "black"
+        }`}
     >
       <Script
         src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
@@ -42,7 +41,7 @@ export default function RootLayout({
       <script
         async
         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7051464837195925"
-        crossorigin="anonymous"
+        crossOrigin="anonymous"
       ></script>
       <Script src="../components/twitter-pixel.js" strategy="lazyOnload" />
 

@@ -19,52 +19,43 @@ export default function Home() {
   const [isCityClicked, setIsCityClicked] = useState<boolean>(false);
   const [progress, setProgress] = useState(0);
 
+  async function fetchForecast(lat: number, lon: number) {
+    const forecastUrl = "forecast.json";
+    try {
+      const res = await axios.get(
+        `//api.weatherapi.com/v1/${forecastUrl}?key=${process.env.NEXT_PUBLIC_API_KEY
+        }&q=${lat + "," + lon
+        }&days=7`
+      );
+      setWeatherData(res.data);
+    } catch (error) {
+      console.log("Error Fetching data:", error);
+    }
+  }
+
   const onClickCity = (lat: number, lon: number) => {
     setIsCityClicked(true);
     setProgress(progress + 50);
-    navigator.geolocation.getCurrentPosition(
-      async function () {
-        const forecastUrl = "forecast.json";
-        try {
-          const res = await axios.get(
-            `//api.weatherapi.com/v1/${forecastUrl}?key=${
-              process.env.NEXT_PUBLIC_API_KEY
-            }&q=${lat + "," + lon}&days=7`
-          );
-          setWeatherData(res.data);
-          setProgress(100);
-        } catch (error) {
-          console.log("Error Fetching data:", error);
-        }
-      },
-      function (error) {
-        console.error("Error getting location:", error.message);
-      }
-    );
+    fetchForecast(lat, lon);
+    setProgress(100);
   };
 
   useEffect(() => {
     if (!isCityClicked) {
-      navigator.geolocation.getCurrentPosition(
-        async function (position) {
-          const forecastUrl = "forecast.json";
-          try {
-            const res = await axios.get(
-              `//api.weatherapi.com/v1/${forecastUrl}?key=${
-                process.env.NEXT_PUBLIC_API_KEY
-              }&q=${
-                position.coords.latitude + "," + position.coords.longitude
-              }&days=7`
-            );
-            setWeatherData(res.data);
-          } catch (error) {
-            console.log("Error Fetching data:", error);
-          }
-        },
-        function (error) {
-          console.error("Error getting location:", error.message);
+      navigator.permissions.query({ name: 'geolocation' }).then(function (result) {
+        if (result.state === 'granted') {
+          navigator.geolocation.getCurrentPosition(
+            async function (position) {
+              fetchForecast(position.coords.latitude, position.coords.latitude);
+            },
+            function (error) {
+              console.error("Error getting location:", error.message);
+            }
+          );
+        } else if (result.state === 'denied') {
+          fetchForecast(40.71, -74.01);
         }
-      );
+      });
     }
     initializeGoogleTagManager("GTM-T8QXCC9J");
   }, []);

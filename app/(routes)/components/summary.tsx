@@ -51,7 +51,6 @@ const Summary: React.FC<SummaryProps> = ({ data }) => {
           }
         );
         setDailyForecasts(weatherResponse.data.dailyForecasts);
-        console.log(weatherResponse.data.dailyForecasts);
       }
     } catch (error) {
       console.log("Error Fetching Summary Data: ", error);

@@ -17,10 +17,10 @@ export default function WeatherPageLayout({
   useEffect(() => {
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(
-        function () {},
+        function () { },
         function (error) {
           console.error("Error getting location:", error.message);
-          router.push("/location");
+          // router.push("/location");
         }
       );
       setLoading(true);
@@ -29,7 +29,7 @@ export default function WeatherPageLayout({
       }, 3000);
     } else {
       console.error("Geolocation is not available in this browser.");
-      router.push("/location");
+      // router.push("/location");
     }
   }, [router]);
 
