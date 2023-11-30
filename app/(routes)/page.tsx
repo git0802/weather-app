@@ -46,7 +46,7 @@ export default function Home() {
         if (result.state === 'granted') {
           navigator.geolocation.getCurrentPosition(
             async function (position) {
-              fetchForecast(position.coords.latitude, position.coords.latitude);
+              fetchForecast(position.coords.latitude, position.coords.longitude);
             },
             function (error) {
               console.error("Error getting location:", error.message);
