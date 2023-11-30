@@ -63,76 +63,72 @@ const Summary: React.FC<SummaryProps> = ({ data }) => {
 
   const generateSummary = (summaryType: any) => {
     setButtonType(summaryType);
-    navigator.geolocation.getCurrentPosition(
-      async function () {
-        setSummaryData("");
-        setSummaryImage("");
-        setSummaryAudio("");
-        setLoadingProgress(0);
-        setStatusError(false);
+    async function getSummaryData() {
+      setSummaryData("");
+      setSummaryImage("");
+      setSummaryAudio("");
+      setLoadingProgress(0);
+      setStatusError(false);
 
-        const interval = setInterval(() => {
-          setLoadingProgress((oldProgress) => {
-            if (oldProgress >= 75) {
-              // Changed to 75 for better progress distribution
-              clearInterval(interval);
-              return oldProgress;
-            }
-            const newProgress = oldProgress + 1;
-            return newProgress;
-          });
-        }, 500);
-
-        try {
-          if (dailyForecasts) {
-            setLoadingStatus(true);
-            const res = await axios.post(
-              `${process.env.NEXT_PUBLIC_BASE_URL}/generateSummary`,
-              {
-                dailyForecasts,
-                lat,
-                lon,
-                address,
-                picture,
-                audio,
-                summaryType,
-              }
-            );
+      const interval = setInterval(() => {
+        setLoadingProgress((oldProgress) => {
+          if (oldProgress >= 75) {
+            // Changed to 75 for better progress distribution
             clearInterval(interval);
-
-            const interval2 = setInterval(() => {
-              setLoadingProgress((oldProgress) => {
-                if (oldProgress >= 100) {
-                  clearInterval(interval2);
-                  return oldProgress;
-                }
-                const newProgress = oldProgress + 1;
-                return newProgress;
-              });
-            }, 125);
-
-            setTimeout(() => {
-              clearInterval(interval2);
-              setLoadingProgress(100);
-              setLoadingStatus(false);
-              setSummaryData(res.data.summary);
-              setSummaryImage(res.data.imageUrl);
-              setSummaryAudio(res.data.audioBase64);
-            }, 10000);
+            return oldProgress;
           }
-        } catch (error) {
+          const newProgress = oldProgress + 1;
+          return newProgress;
+        });
+      }, 500);
+
+      try {
+
+        if (dailyForecasts) {
+          setLoadingStatus(true);
+          const res = await axios.post(
+            `${process.env.NEXT_PUBLIC_BASE_URL}/generateSummary`,
+            {
+              dailyForecasts,
+              lat,
+              lon,
+              address,
+              picture,
+              audio,
+              summaryType,
+            }
+          );
           clearInterval(interval);
-          setLoadingStatus(false);
-          setStatusError(true);
-          console.log("Error Fetching Summary Data: ", error);
+
+          const interval2 = setInterval(() => {
+            setLoadingProgress((oldProgress) => {
+              if (oldProgress >= 100) {
+                clearInterval(interval2);
+                return oldProgress;
+              }
+              const newProgress = oldProgress + 1;
+              return newProgress;
+            });
+          }, 125);
+
+          setTimeout(() => {
+            clearInterval(interval2);
+            setLoadingProgress(100);
+            setLoadingStatus(false);
+            setSummaryData(res.data.summary);
+            setSummaryImage(res.data.imageUrl);
+            setSummaryAudio(res.data.audioBase64);
+          }, 10000);
         }
-      },
-      function (error) {
+      } catch (error) {
+        clearInterval(interval);
         setLoadingStatus(false);
         setStatusError(true);
-        console.error("Error getting Summary Data: ", error.message);
+        console.log("Error Fetching Summary Data: ", error);
       }
-    );
+    }
+
+    getSummaryData();
   };
 
   useEffect(() => {
