@@ -24,9 +24,9 @@ export default function Home() {
     const forecastUrl = "forecast.json";
     try {
       const res = await axios.get(
-        `//api.weatherapi.com/v1/${forecastUrl}?key=${process.env.NEXT_PUBLIC_API_KEY
-        }&q=${lat + "," + lon
-        }&days=7`
+        `//api.weatherapi.com/v1/${forecastUrl}?key=${
+          process.env.NEXT_PUBLIC_API_KEY
+        }&q=${lat + "," + lon}&days=7`
       );
       setWeatherData(res.data);
     } catch (error) {
@@ -43,20 +43,36 @@ export default function Home() {
 
   useEffect(() => {
     if (!isCityClicked) {
-      navigator.permissions.query({ name: 'geolocation' }).then(function (result) {
-        if (result.state === 'granted') {
-          navigator.geolocation.getCurrentPosition(
-            async function (position) {
-              fetchForecast(position.coords.latitude, position.coords.longitude);
-            },
-            function (error) {
-              console.error("Error getting location:", error.message);
+      // Define the success callback function
+      const handleGeoSuccess = (position: any) => {
+        fetchForecast(position.coords.latitude, position.coords.longitude);
+      };
+
+      // Define the error callback function
+      const handleGeoError = (error: any) => {
+        console.error("Error getting location:", error.message);
+        // Check for permissions or fallback directly without asking for permissions
+        navigator.permissions
+          .query({ name: "geolocation" })
+          .then(function (result) {
+            if (result.state === "denied") {
+              // Fallback if geolocation permission is denied
+              fetchForecast(40.71, -74.01);
+            } else {
+              // Handle other cases such as 'prompt' or 'granted' with further user interaction or logic
+              console.error(
+                "The geolocation permission state is:",
+                result.state
+              );
             }
-          );
-        } else if (result.state === 'denied') {
-          fetchForecast(40.71, -74.01);
-        }
-      });
+          });
+      };
+
+      // Request the current position
+      navigator.geolocation.getCurrentPosition(
+        handleGeoSuccess,
+        handleGeoError
+      );
     }
     initializeGoogleTagManager("GTM-T8QXCC9J");
     initGA();
